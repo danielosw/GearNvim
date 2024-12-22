@@ -18,6 +18,7 @@ return {
 		config = function()
 			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
 		end,
+		event = { "LspAttach" },
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
@@ -39,6 +40,9 @@ return {
 				use_icons_from_diagnostic = true,
 				-- Enable diagnostic message on all lines.
 				multilines = true,
+
+				-- Show all diagnostics on the cursor line.
+				show_all_diags_on_cursorline = false,
 			},
 		},
 	},
