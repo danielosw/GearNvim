@@ -11,12 +11,35 @@ return {
 				clients = { "ruff" },
 			},
 		},
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "LspAttach" },
 	},
 	{
 		"aznhe21/actions-preview.nvim",
 		config = function()
 			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
 		end,
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = { "LspAttach" },
+		priority = 1000,
+		opts = {
+			hi = {
+				error = "DiagnosticError",
+				warn = "DiagnosticWarn",
+				info = "DiagnosticInfo",
+				hint = "DiagnosticHint",
+				arrow = "NonText",
+			},
+			options = {
+				-- Show the source of the diagnostic.
+				show_source = true,
+
+				-- Use your defined signs in the diagnostic config table.
+				use_icons_from_diagnostic = true,
+				-- Enable diagnostic message on all lines.
+				multilines = true,
+			},
+		},
 	},
 }

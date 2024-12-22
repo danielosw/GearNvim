@@ -50,6 +50,8 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
+-- Disabling this to use tiny inline diagnostic
+vim.diagnostic.config({ virtual_text = false })
 -- Importing a helper value so that we don't spam a bunch costly function
 require("helpers.wherepython")
 require("lazy").setup({
