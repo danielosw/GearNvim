@@ -1,1 +1,6 @@
-{"<l":{"body":"<leader>","prefix":"<l"}}
+{
+	"<l": {
+		"body": "<leader>",
+		"prefix": "<l"
+	}
+}

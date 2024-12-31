@@ -1,3 +1,73 @@
+local menuoption = {
+	{
+		name = "Format Buffer",
+		cmd = function()
+			require("conform").format({ async = true })
+		end,
+		rtxt = "<leader>f",
+	},
+
+	{
+		name = "Code Actions",
+		cmd = function()
+			require("actions-preview").code_actions()
+		end,
+		rtxt = "<leader>gf",
+	},
+
+	{ name = "separator" },
+
+	{
+		name = "  Lsp Actions",
+		hl = "Exblue",
+		items = "lsp",
+	},
+
+	{ name = "separator" },
+
+	{
+		name = "Edit Config",
+		cmd = function()
+			vim.cmd("tabnew")
+			vim.cmd(":e $MYVIMRC | :cd %:p:h | NvimTreeOpen | wincmd k | pwd<CR>")
+		end,
+	},
+
+	{
+		name = "Copy Content",
+		cmd = "yank",
+		rtxt = "<C-c>",
+	},
+	{
+		name = "Delete Content",
+		cmd = "%d",
+		rtxt = "dc",
+	},
+
+	{ name = "separator" },
+
+	{
+		name = "  Open in terminal",
+		hl = "ExRed",
+		cmd = function()
+			local old_buf = require("menu.state").old_data.buf
+			local old_bufname = vim.api.nvim_buf_get_name(old_buf)
+			local old_buf_dir = vim.fn.fnamemodify(old_bufname, ":h")
+
+			local cmd = "cd " .. old_buf_dir
+
+			-- base46_cache var is an indicator of nvui user!
+			if vim.g.base46_cache then
+				require("nvchad.term").new({ cmd = cmd, pos = "sp" })
+			else
+				vim.cmd("new")
+				vim.fn.termopen({ vim.o.shell, "-c", cmd .. " ; " .. vim.o.shell })
+			end
+		end,
+	},
+
+	{ name = "separator" },
+}
 return {
 	{
 		"MunifTanjim/nougat.nvim",
@@ -85,5 +155,28 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		cmd = { "NvimTreeOpen", "NvimTreeToggle" },
+	},
+	{ "nvzone/volt", lazy = true },
+	{
+		"nvzone/menu",
+		lazy = true,
+		keys = {
+			{
+				"<RightMouse>",
+				function()
+					-- If the window already exists, close it before opening another one.
+					for _, win in ipairs(vim.api.nvim_list_wins()) do
+						local buf = vim.api.nvim_win_get_buf(win)
+						if vim.bo[buf].filetype == "NvMenu" then
+							vim.api.nvim_win_close(win, true)
+						end
+					end
+					local options = vim.bo.ft == "NvimTree" and "nvimtree" or menuoption
+					require("menu").open(options, { mouse = true, border = true })
+				end,
+				"n",
+				desc = "Open mouse menu",
+			},
+		},
 	},
 }

@@ -1,4 +1,3 @@
-local keymap = vim.keymap
 local g = vim.g
 local o = vim.o
 g.neovide_theme = "auto"
