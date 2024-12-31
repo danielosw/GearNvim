@@ -1,12 +1,12 @@
 local Mason_registry = require("mason-registry")
 local dapui = require("dapui")
-local Dap = require("dap")
+Dap = require("dap")
 Dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end
 -- Takes in a string and configs a matching dap.
 -- The reason I do it this way is so it does not crash if a dap is not installed, because some of configs require it to be installed in mason.
-function setupDap(temp)
+local function setupDap(temp)
 	if temp == "debugpy" then
 		Dap.adapters.python = function(cb, config)
 			if config.request == "attach" then

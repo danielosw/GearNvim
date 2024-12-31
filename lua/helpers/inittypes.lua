@@ -6,7 +6,7 @@ if ft == "cpp" then
 			type = "codelldb",
 			request = "launch",
 			program = function()
-				return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
 			end,
 			cwd = "${workspaceFolder}",
 			stopOnEntry = false,
@@ -19,7 +19,7 @@ elseif ft == "c" then
 			type = "codelldb",
 			request = "launch",
 			program = function()
-				return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
 			end,
 			cwd = "${workspaceFolder}",
 			stopOnEntry = false,
@@ -32,7 +32,7 @@ elseif ft == "rust" then
 			type = "codelldb",
 			request = "launch",
 			program = function()
-				return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
 			end,
 			cwd = "${workspaceFolder}",
 			stopOnEntry = false,

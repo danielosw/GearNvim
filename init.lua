@@ -1,12 +1,12 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- helper to check if we are running on windows
-require("helpers.iswindows")
+-- Helper that calls some stuff once so we don't do it over and over
+require("helpers.callonce")
 if Windows then
 	-- set shell to powershell on windows.
 	vim.o.shell = "pwsh.exe"
 end
 -- install lazy if not installed already
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
@@ -18,18 +18,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 -- add mise shims to path if on linux and shims path exists
-if
-	Windows ~= true
-	and function()
-			local temp = vim.fn.chdir("~/.local/share/mise/shims")
-			if temp ~= "" then
-				vim.fn.chdir(temp)
-			end
-			return temp
-		end
-		~= ""
-then
-	vim.env.PATH = vim.env.HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH
+if Windows ~= true and vim.uv.fs_stat("~/.local/share/mise/shims") then
+	vim.env.PATH = HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH
 end
 -- config things that need to be changed before plugins are loaded
 local g = vim.g
@@ -52,8 +42,9 @@ o.shiftwidth = 4
 o.number = true
 -- Disabling this to use tiny inline diagnostic
 vim.diagnostic.config({ virtual_text = false })
--- Importing a helper value so that we don't spam a bunch costly function
-require("helpers.wherepython")
+-- terminal specific config options
+require("helpers.terms")
+
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },

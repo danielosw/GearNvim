@@ -23,12 +23,9 @@ local headers = {
 		[[██████  █████████████████████ ████ █████ █████ ████ ██████]],
 	},
 }
-function footer()
-	return { Quotes[math.random(#Quotes)] }
-end
 
 dashboard.section.header.val = headers[math.random(#headers)]
-dashboard.section.footer.val = footer()
+dashboard.section.footer.val = Quotes[math.random(#Quotes)]
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
 	dashboard.button("f", "󰱼  > Find file", ":Telescope find_files<CR>"),

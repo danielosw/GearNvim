@@ -11,7 +11,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		config = function()
 			require("luasnip.loaders.from_vscode").lazy_load({
-				paths = vim.fn.stdpath("config") .. "/snippets",
+				paths = ConfigPath .. "/snippets",
 			})
 		end,
 		build = function()
@@ -21,6 +21,6 @@ return {
 				return "make install_jsregexp"
 			end
 		end,
-		dependencies = { "rafamadriz/friendly-snippets", "molleweide/LuaSnip-snippets.nvim" },
+		dependencies = { "rafamadriz/friendly-snippets" },
 	},
 }

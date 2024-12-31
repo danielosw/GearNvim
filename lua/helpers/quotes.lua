@@ -13,7 +13,7 @@ local inspire = {
 	"Nothing about us without us.",
 }
 if Inspire then
-	for i, v in ipairs(inspire) do
+	for _, v in ipairs(inspire) do
 		Quotes[#Quotes + 1] = v
 	end
 end
@@ -24,7 +24,7 @@ local funny = {
 	"I use Arch btw",
 }
 if Comedy then
-	for i, v in ipairs(funny) do
+	for _, v in ipairs(funny) do
 		Quotes[#Quotes + 1] = v
 	end
 end

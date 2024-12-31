@@ -25,16 +25,6 @@ return {
 	{
 		"Mofiqul/dracula.nvim",
 		priority = 200,
-		opts = {
-			show_end_of_buffer = false,
-			transparent_bg = false,
-			italic_comment = false,
-			colors = {},
-			overrides = {
-				WinBar = { bg = "bg" },
-				WinBarNC = { bg = "bg" },
-				TabLineSel = { bg = "bg" },
-			},
-		},
+		opts = Termconf.draculaopts,
 	},
 }

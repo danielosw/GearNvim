@@ -65,7 +65,7 @@ return {
 		},
 		opts = {
 
-			snippetDir = vim.fn.stdpath("config") .. "/snippets",
+			snippetDir = ConfigPath .. "/snippets",
 		},
 	},
 	{

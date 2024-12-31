@@ -71,9 +71,9 @@ require("lspconfig").fish_lsp.setup({})
 -- setup ruff
 ruffconfig = function()
 	if Windows then
-		return vim.env.HOME .. "\\AppData\\Roaming\\ruff\\ruff.toml"
+		return HOME .. "\\AppData\\Roaming\\ruff\\ruff.toml"
 	else
-		return vim.env.HOME .. "/.config/ruff/ruff.toml"
+		return HOME .. "/.config/ruff/ruff.toml"
 	end
 end
 require("lspconfig").ruff.setup({
