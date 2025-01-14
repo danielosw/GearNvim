@@ -24,10 +24,13 @@ end
 conform.setup({
 	formatters_by_ft = {
 		lua = function(bufnr)
-			return haveformat("stylua", bufnr)
+			return haveformat(bufnr, "stylua")
 		end,
 		-- I can't figure out how do to this without hard coding it
-		rust = { "rustfmt" },
+		rust = function(bufnr)
+			return haveformat(bufnr, "rustfmt")
+		end,
+
 		python = function(bufnr)
 			return haveRuff(bufnr)
 		end,
