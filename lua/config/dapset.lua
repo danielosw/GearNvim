@@ -13,7 +13,7 @@ local function setupDap(temp)
 				local port = (config.connect or config).port
 				local host = (config.connect or config).host or "127.0.0.1"
 				cb({
-					type = server,
+					type = "server",
 					port = assert(port, "connect.port is required for a python attach configuration"),
 					host = host,
 					options = {
