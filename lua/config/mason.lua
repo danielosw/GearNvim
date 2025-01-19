@@ -20,7 +20,6 @@ end
 -- Not used in this file but is used in dapset
 Daps = {}
 -- loop through packages.
-blinklsps = {}
 for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 	-- Loop through the type assigned to the package.
 	for _, type in ipairs(pkg_info.spec.categories) do
@@ -31,11 +30,9 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 			lsp = masonconfig.get_mappings().mason_to_lspconfig[pkg_info.name]
 			-- We need to do special config for pylsp to disable plugins
 			if lsp ~= "pylsp" then
-				local capabilities = require("blink.cmp").get_lsp_capabilities()
-				lspconfig[lsp].setup({ on_attach = on_attach, capabilities = capabilities })
+				lspconfig[lsp].setup({ on_attach = on_attach })
 			else
 				-- We want to let the user format with what they want so just disable everything except rope
-				local capabilities = require("blink.cmp").get_lsp_capabilities()
 				lspconfig[lsp].setup({
 					on_attach = function(client, bufnr)
 						navic.attach(client, bufnr)
@@ -61,7 +58,6 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 							},
 						},
 					},
-					capabilities = capabilities,
 				})
 			end
 		end
