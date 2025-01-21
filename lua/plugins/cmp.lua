@@ -1,9 +1,13 @@
 return {
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/nvim-cmp" },
+	{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+	{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+	{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
+	{ --* the completion engine *--
+		"iguanacucumber/magazine.nvim",
+
+		name = "nvim-cmp", -- Otherwise highlighting gets messed up
+	},
+	"https://codeberg.org/FelipeLema/cmp-async-path",
 	{ "saadparwaiz1/cmp_luasnip" },
 	{ "onsails/lspkind.nvim", lazy = true },
 
