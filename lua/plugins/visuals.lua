@@ -154,27 +154,4 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 	},
-	{ "nvzone/volt", lazy = true },
-	{
-		"nvzone/menu",
-		lazy = true,
-		keys = {
-			{
-				"<RightMouse>",
-				function()
-					-- If the window already exists, close it before opening another one.
-					for _, win in ipairs(vim.api.nvim_list_wins()) do
-						local buf = vim.api.nvim_win_get_buf(win)
-						if vim.bo[buf].filetype == "NvMenu" then
-							vim.api.nvim_win_close(win, true)
-						end
-					end
-					local options = vim.bo.ft == "NvimTree" and "nvimtree" or menuoption
-					require("menu").open(options, { mouse = true, border = true })
-				end,
-				"n",
-				desc = "Open mouse menu",
-			},
-		},
-	},
 }
