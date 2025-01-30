@@ -71,7 +71,6 @@ local menuoption = {
 return {
 	{
 		"MunifTanjim/nougat.nvim",
-		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("config.nougat")
 		end,
@@ -154,7 +153,6 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
-		cmd = { "NvimTreeOpen", "NvimTreeToggle" },
 	},
 	{ "nvzone/volt", lazy = true },
 	{
