@@ -1,3 +1,4 @@
+
 if NVscode then
 	return {
 		"neovim/nvim-lspconfig",
@@ -11,6 +12,7 @@ if NVscode then
 				ignore = {
 					clients = { "ruff" },
 				},
+
 			},
 			event = { "LspAttach" },
 		},

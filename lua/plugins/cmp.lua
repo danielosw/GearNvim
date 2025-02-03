@@ -12,6 +12,7 @@ return {
 	{ "saadparwaiz1/cmp_luasnip", cond = NVscode },
 	{ "onsails/lspkind.nvim", lazy = true, cond = NVscode },
 
+
 	{
 		"L3MON4D3/LuaSnip",
 		config = function()
@@ -27,6 +28,8 @@ return {
 			end
 		end,
 		dependencies = { "rafamadriz/friendly-snippets" },
+
 		cond = NVscode,
+
 	},
 }
