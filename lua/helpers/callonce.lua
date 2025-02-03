@@ -28,3 +28,4 @@ ConfigPath = vim.fn.stdpath("config")
 Term = vim.env.TERM
 Windows = Iswindows()
 PythonPath = getPython()
+NVscode = vim.g.vscode ~= 1
