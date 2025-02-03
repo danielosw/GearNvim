@@ -25,7 +25,7 @@ return {
 			},
 		},
 		cond = NVscode,
-		con
+		con,
 	},
 	{ "jay-babu/mason-nvim-dap.nvim", cond = NVscode },
 	{
