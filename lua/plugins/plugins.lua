@@ -1,6 +1,6 @@
 return {
 	{ "nvim-lua/plenary.nvim", lazy = true },
-	{ "williamboman/mason.nvim", lazy = true, cond = NVscode },
+	{ "williamboman/mason.nvim", lazy = true },
 
 	{
 		"folke/lazydev.nvim",
@@ -14,7 +14,6 @@ return {
 		opts = { templates = { "builtin" } },
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "OverseerInfo" },
-		cond = NVscode,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -42,7 +41,6 @@ return {
 				desc = " rip substitute",
 			},
 		},
-		cond = NVscode,
 	},
 	{
 		"chrisgrieser/nvim-scissors",
@@ -107,6 +105,5 @@ return {
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
-		cond = NVscode,
 	},
 }

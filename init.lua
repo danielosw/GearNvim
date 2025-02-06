@@ -61,26 +61,20 @@ require("lazy").setup({
 -- dap helper to load dap configs on filetypes
 require("helpers.inittypes")
 -- config ui
-if NVscode then
-	require("config.ui")
-end
+require("config.ui")
 -- Config mason and related
 -- TODO: rename and split up this config
-if NVscode then
-	require("config.mason")
-	-- setup conform
-	require("config.conform")
-	-- setup dap, MUST HAPPEN AFTER MASON CONFIG
-	require("config.dapset")
-	-- setup cmp and snippets
-	require("config.cmp")
-end
+require("config.mason")
+-- setup conform
+require("config.conform")
+-- setup dap, MUST HAPPEN AFTER MASON CONFIG
+require("config.dapset")
+-- setup cmp and snippets
+require("config.cmp")
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size
-if NVscode then
-	require("config.alpha")
-end
+require("config.alpha")
 -- if we are using neovide load neovide specific options
 if vim.g.neovide then
 	require("config.neovide")

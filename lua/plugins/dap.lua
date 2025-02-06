@@ -24,10 +24,8 @@ return {
 				desc = "Terminate Debugger",
 			},
 		},
-		cond = NVscode,
-		con,
 	},
-	{ "jay-babu/mason-nvim-dap.nvim", cond = NVscode },
+	"jay-babu/mason-nvim-dap.nvim",
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -48,6 +46,5 @@ return {
 				require("dapui").open()
 			end
 		end,
-		cond = NVscode,
 	},
 }
