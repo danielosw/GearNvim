@@ -1,17 +1,15 @@
 return {
-	{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {}, cond = NVscode },
-	{ "iguanacucumber/mag-buffer", name = "cmp-buffer", cond = NVscode },
-	{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline", cond = NVscode },
+	{ "iguanacucumber/mag-nvim-lsp", name = "cmp-nvim-lsp", opts = {} },
+	{ "iguanacucumber/mag-buffer", name = "cmp-buffer" },
+	{ "iguanacucumber/mag-cmdline", name = "cmp-cmdline" },
 	{ --* the completion engine *--
 		"iguanacucumber/magazine.nvim",
 
-		name = "nvim-cmp",
-		cond = NVscode,
+		name = "nvim-cmp", -- Otherwise highlighting gets messed up
 	},
-	{ "https://codeberg.org/FelipeLema/cmp-async-path", cond = NVscode },
-	{ "saadparwaiz1/cmp_luasnip", cond = NVscode },
-	{ "onsails/lspkind.nvim", lazy = true, cond = NVscode },
-
+	"https://codeberg.org/FelipeLema/cmp-async-path",
+	{ "saadparwaiz1/cmp_luasnip" },
+	{ "onsails/lspkind.nvim", lazy = true },
 
 	{
 		"L3MON4D3/LuaSnip",
@@ -28,8 +26,5 @@ return {
 			end
 		end,
 		dependencies = { "rafamadriz/friendly-snippets" },
-
-		cond = NVscode,
-
 	},
 }
