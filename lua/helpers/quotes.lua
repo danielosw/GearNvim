@@ -22,6 +22,7 @@ Comedy
 --]]
 local funny = {
 	"I use Arch btw",
+	"And your Albino Rat will need some days of leave, as she does not get along with frogs, citing some prehistoric battle between their kind.",
 }
 if Comedy then
 	for _, v in ipairs(funny) do
