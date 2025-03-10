@@ -70,6 +70,4 @@ local function setupDap(temp)
 end
 
 -- Get a list of all installed daps and setup any found
-for _, founddap in ipairs(Daps) do
-	setupDap(founddap)
-end
+ForEach(Daps, setupDap)

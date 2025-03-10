@@ -23,6 +23,23 @@ local function Iswindows()
 		return false
 	end
 end
+function Map(iter, func)
+	do
+		local toReturn = {}
+		for _, value in ipairs(iter) do
+			toReturn[#toReturn + 1] = func(value)
+		end
+		return toReturn
+	end
+end
+function ForEach(iter, func)
+	do
+		for _, value in ipairs(iter) do
+			func(value)
+		end
+	end
+end
+
 HOME = vim.env.HOME
 ConfigPath = vim.fn.stdpath("config")
 Term = vim.env.TERM
