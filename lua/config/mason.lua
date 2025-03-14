@@ -19,6 +19,7 @@ local on_attach = function(client, bufnr)
 end
 -- Not used in this file but is used in dapset
 Daps = {}
+
 -- loop through packages.
 for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 	-- Loop through the type assigned to the package.
@@ -31,9 +32,9 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 			-- We need to do special config for pylsp to disable plugins
 			if lsp ~= "pylsp" then
 				lspconfig[lsp].setup({ on_attach = on_attach })
-			else
 				-- We want to let the user format with what they want so just disable everything except rope
-				lspconfig[lsp].setup({
+			else
+				lspconfig["pylsp"].setup({
 					on_attach = function(client, bufnr)
 						navic.attach(client, bufnr)
 					end,
