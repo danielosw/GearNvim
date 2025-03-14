@@ -177,10 +177,10 @@ return {
 					-- require('hover.providers.gh')
 					-- require('hover.providers.gh_user')
 					-- require('hover.providers.jira')
-					-- require('hover.providers.dap')
+					require("hover.providers.dap")
 					-- require('hover.providers.fold_preview')
 					-- require('hover.providers.diagnostic')
-					-- require('hover.providers.man')
+					require("hover.providers.man")
 					-- require('hover.providers.dictionary')
 				end,
 				preview_opts = {
@@ -193,7 +193,7 @@ return {
 				mouse_providers = {
 					"LSP",
 				},
-				mouse_delay = 1000,
+				mouse_delay = 500,
 			})
 			vim.keymap.set("n", "K", require("hover").hover, { desc = "hover.nvim" })
 			vim.keymap.set("n", "gK", require("hover").hover_select, { desc = "hover.nvim (select)" })
