@@ -165,6 +165,8 @@ return {
 			statuscolumn = { enabled = false },
 			words = { enabled = true },
 			image = { enabled = true },
+			lazygit = {enabled = true},
+			git = {enabled = true},
 		},
 	},
 	{
