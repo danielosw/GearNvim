@@ -28,7 +28,7 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 		if type == "DAP" then
 			Daps[#Daps + 1] = pkg_info.name
 		elseif type == "LSP" then
-			lsp = masonconfig.get_mappings().mason_to_lspconfig[pkg_info.name]
+			lsp = masonconfig.get_mappings().package_to_lspconfig[pkg_info.name]
 			-- We need to do special config for pylsp to disable plugins
 			if lsp ~= "pylsp" then
 				lspconfig[lsp].setup({ on_attach = on_attach })
