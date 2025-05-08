@@ -108,7 +108,10 @@ return {
 	},
 	{
 		"nvim-neorg/neorg",
+
 		version = "*", -- Pin Neorg to the latest stable release
+		-- neorg is the most expensive load so I lazy load it
+		cmd = "Neorg",
 		ft = "norg",
 		opts = {
 			load = {
