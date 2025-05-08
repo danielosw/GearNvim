@@ -184,6 +184,7 @@ return {
 					-- require('hover.providers.diagnostic')
 					require("hover.providers.man")
 					-- require('hover.providers.dictionary')
+					vim.o.mousemoveevent = true
 				end,
 				preview_opts = {
 					border = "single",

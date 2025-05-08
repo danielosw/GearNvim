@@ -31,6 +31,7 @@ cmp.setup({
 				name = "lazydev",
 				group_index = 0,
 			},
+			{ name = "neorg" },
 		}
 
 		--{ name = "vsnip" }, -- For vsnip users.
