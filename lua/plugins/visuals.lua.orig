@@ -198,8 +198,11 @@ return {
 			statuscolumn = { enabled = false },
 			words = { enabled = true },
 			image = { enabled = true },
+<<<<<<< HEAD
+=======
 			lazygit = { enabled = true },
 			git = { enabled = true },
+>>>>>>> refs/remotes/origin/experiment
 		},
 	},
 	{
@@ -217,7 +220,6 @@ return {
 					-- require('hover.providers.diagnostic')
 					require("hover.providers.man")
 					-- require('hover.providers.dictionary')
-					vim.o.mousemoveevent = true
 				end,
 				preview_opts = {
 					border = "single",
