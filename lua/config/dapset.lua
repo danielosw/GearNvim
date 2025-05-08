@@ -29,7 +29,7 @@ local function setupDap(temp)
 				end
 				cb({
 					type = "executable",
-					command = pypath:get_install_path() .. catpath,
+					command = vim.fn.exepath("debugpy") .. catpath,
 					args = { "-m", "debugpy.adapter" },
 					options = {
 						source_filetype = "python",
@@ -49,7 +49,7 @@ local function setupDap(temp)
 			type = "server",
 			port = "${port}",
 			executable = {
-				command = templldb:get_install_path() .. catpath,
+				command = vim.fn.exepath("codelldb") .. catpath,
 				args = { "--port", "${port}" },
 			},
 		}
@@ -64,7 +64,7 @@ local function setupDap(temp)
 		Dap.adapters.firefox = {
 			type = "executable",
 			command = "node",
-			args = tempfox:get_install_path() .. catpath,
+			args = vim.fn.exepath("firefox-debug-adapter") .. catpath,
 		}
 	end
 end
