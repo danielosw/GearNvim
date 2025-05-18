@@ -1,7 +1,7 @@
 return {
-	"neovim/nvim-lspconfig",
 	"nvimtools/none-ls.nvim",
 	"jay-babu/mason-null-ls.nvim",
+	"neovim/nvim-lspconfig",
 	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false } },
 	{
 		"danielosw/nvim-lightbulb",
