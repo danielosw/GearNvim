@@ -2,6 +2,21 @@ return {
 	"nvimtools/none-ls.nvim",
 	"jay-babu/mason-null-ls.nvim",
 	"neovim/nvim-lspconfig",
+	{ "williamboman/mason.nvim", lazy = true },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = { "lazy.nvim", "mason.nvim", "nvim-dap", "nvim-cmp" },
+		},
+	},
+	{
+		"stevearc/overseer.nvim",
+		opts = { templates = { "builtin" } },
+		event = { "BufReadPre", "BufNewFile" },
+		cmd = { "OverseerInfo" },
+	},
+
 	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false } },
 	{
 		"danielosw/nvim-lightbulb",

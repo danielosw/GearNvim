@@ -18,7 +18,7 @@ local on_attach = function(client, bufnr)
 end
 -- Not used in this file but is used in dapset
 Daps = {}
-
+vim.lsp.config("*", { on_attach = on_attach })
 -- loop through packages.
 for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 	-- Loop through the type assigned to the package.
@@ -30,7 +30,6 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 			local lsp2 = masonconfig.get_mappings().package_to_lspconfig[pkg_info.name]
 			-- We need to do special config for pylsp to disable plugins
 			if lsp2 ~= "pylsp" then
-				vim.lsp.config(lsp2, { on_attach = on_attach })
 				vim.lsp.enable(lsp2, true)
 				-- We want to let the user format with what they want so just disable everything except rope
 			else
