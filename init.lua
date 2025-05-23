@@ -75,6 +75,8 @@ require("config.cmp")
 require("config.keybinds")
 -- setup alpha, in its own file due to size
 require("config.alpha")
+-- load custom pickers
+require("config.telescope")
 -- if we are using neovide load neovide specific options
 if vim.g.neovide then
 	require("config.neovide")
