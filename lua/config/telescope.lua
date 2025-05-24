@@ -43,6 +43,10 @@ local themepick = function(opts)
 					if filehandle ~= nil then
 						filehandle.write(filehandle, 'vim.cmd("colorscheme ' .. selection[1] .. '")')
 					end
+					-- close file
+					if filehandle ~= nil then
+						filehandle.close(filehandle)
+					end
 				end)
 				return true
 			end,
@@ -57,6 +61,7 @@ local themepick = function(opts)
 
 					vim.cmd("colorscheme " .. entry[1])
 				end,
+
 				get_buffer_by_name = function()
 					return p
 				end,
