@@ -141,6 +141,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		build = ":TSUpdate",
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = "TSUpdate",

@@ -87,26 +87,11 @@ vim.lsp.config["ruff"] = {
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 local nls = require("null-ls")
--- Setup none-ls
-require("mason-null-ls").setup({
-	automatic_installation = false,
-	handlers = {
-		-- Change mypy to reference a venv.
-		mypy = function(source_name, methods)
-			nls.register(nls.builtins.diagnostics.mypy.with({
-				extra_args = function()
-					return {
-						"--python-executable",
-						PythonPath,
-					}
-				end,
-			}))
-		end,
-	},
-})
-
-require("null-ls").setup({
-	sources = {
-		-- Anything not supported by mason.
-	},
-})
+nls.register(nls.builtins.diagnostics.mypy.with({
+	extra_args = function()
+		return {
+			"--python-executable",
+			PythonPath,
+		}
+	end,
+}))

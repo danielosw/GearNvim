@@ -21,7 +21,6 @@ local function setupDap(temp)
 					},
 				})
 			else
-				local pypath = Mason_registry.get_package("debugpy")
 				if Windows then
 					catpath = "\\venv\\scripts\\python"
 				else
@@ -39,17 +38,11 @@ local function setupDap(temp)
 		end
 	end
 	if temp == "codelldb" then
-		if Windows then
-			catpath = "\\extension\\adapter\\codelldb"
-		else
-			catpath = "/extension/adapter/codelldb"
-		end
-		local templldb = Mason_registry.get_package("codelldb")
 		Dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
 			executable = {
-				command = vim.fn.exepath("codelldb") .. catpath,
+				command = vim.fn.exepath("codelldb"),
 				args = { "--port", "${port}" },
 			},
 		}
@@ -60,7 +53,6 @@ local function setupDap(temp)
 		else
 			catpath = "/dist/adapter.bundle.js"
 		end
-		local tempfox = Mason_registry.get_package("firefox-debug-adapter")
 		Dap.adapters.firefox = {
 			type = "executable",
 			command = "node",

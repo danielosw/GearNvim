@@ -92,13 +92,13 @@ return {
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,
 	},
+	-- comment out neorg till tree sitter is fixed
+	--[[	
 	{
 		"nvim-neorg/neorg",
 
 		version = "*", -- Pin Neorg to the latest stable release
-		-- neorg is the most expensive load so I lazy load it
-		cmd = "Neorg",
-		ft = "norg",
+
 		opts = {
 			load = {
 				["core.defaults"] = {},
@@ -114,5 +114,5 @@ return {
 				},
 			},
 		},
-	},
+	}, ]]
 }
