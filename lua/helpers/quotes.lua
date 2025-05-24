@@ -11,6 +11,7 @@ Vaugly inspiring
 local inspire = {
 	"Strive for progress.",
 	"Nothing about us without us.",
+	"Even the waves of fate can break upon the shores of will.",
 }
 if Inspire then
 	for _, v in ipairs(inspire) do
@@ -22,7 +23,6 @@ Comedy
 --]]
 local funny = {
 	"I use Arch btw",
-	"And your Albino Rat will need some days of leave, as she does not get along with frogs, citing some prehistoric battle between their kind.",
 }
 if Comedy then
 	for _, v in ipairs(funny) do

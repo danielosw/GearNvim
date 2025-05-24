@@ -17,6 +17,7 @@ if not vim.uv.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+
 -- add mise shims to path if on linux and shims path exists
 if Windows ~= true and vim.uv.fs_stat("~/.local/share/mise/shims") then
 	vim.env.PATH = HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH
@@ -57,6 +58,8 @@ require("lazy").setup({
 		},
 	},
 })
+-- load colorscheme early on
+require("config.theme")
 -- load the configs
 -- dap helper to load dap configs on filetypes
 require("helpers.inittypes")
@@ -75,6 +78,8 @@ require("config.cmp")
 require("config.keybinds")
 -- setup alpha, in its own file due to size
 require("config.alpha")
+-- load custom pickers
+require("config.telescope")
 -- if we are using neovide load neovide specific options
 if vim.g.neovide then
 	require("config.neovide")

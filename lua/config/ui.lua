@@ -19,3 +19,7 @@ require("noice").setup({
 require("telescope").load_extension("noice")
 -- setup winbar
 vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+local callback = function()
+	require("snacks").lazygit.open()
+end
+vim.api.nvim_create_user_command("Lazygit", callback, { desc = "opens lazygit" })

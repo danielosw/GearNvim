@@ -1,20 +1,6 @@
 return {
 	{ "nvim-lua/plenary.nvim", lazy = true },
-	{ "williamboman/mason.nvim", lazy = true },
 
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = { "lazy.nvim", "mason.nvim", "nvim-dap", "nvim-cmp" },
-		},
-	},
-	{
-		"stevearc/overseer.nvim",
-		opts = { templates = { "builtin" } },
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "OverseerInfo" },
-	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",

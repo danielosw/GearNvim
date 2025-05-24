@@ -1,7 +1,6 @@
 local mason = require("mason").setup()
 require("mason-nvim-dap").setup()
 require("mason-lspconfig").setup()
-local lspconfig = require("lspconfig")
 local masonconfig = require("mason-lspconfig")
 Mason_registry = require("mason-registry")
 local navic = require("nvim-navic")
@@ -19,7 +18,7 @@ local on_attach = function(client, bufnr)
 end
 -- Not used in this file but is used in dapset
 Daps = {}
-
+vim.lsp.config("*", { on_attach = on_attach })
 -- loop through packages.
 for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 	-- Loop through the type assigned to the package.
@@ -28,13 +27,13 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 		if type == "DAP" then
 			Daps[#Daps + 1] = pkg_info.name
 		elseif type == "LSP" then
-			lsp = masonconfig.get_mappings().package_to_lspconfig[pkg_info.name]
+			local lsp2 = masonconfig.get_mappings().package_to_lspconfig[pkg_info.name]
 			-- We need to do special config for pylsp to disable plugins
-			if lsp ~= "pylsp" then
-				lspconfig[lsp].setup({ on_attach = on_attach })
+			if lsp2 ~= "pylsp" then
+				vim.lsp.enable(lsp2, true)
 				-- We want to let the user format with what they want so just disable everything except rope
 			else
-				lspconfig["pylsp"].setup({
+				vim.lsp.config(lsp2, {
 					on_attach = function(client, bufnr)
 						navic.attach(client, bufnr)
 					end,
@@ -60,15 +59,15 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 						},
 					},
 				})
+				vim.lsp.enable(lsp2, true)
 			end
 		end
 	end
 end
 
--- setup gdscript lsp
-require("lspconfig").gdscript.setup({})
 -- setup fish-lsp
-require("lspconfig").fish_lsp.setup({})
+vim.lsp.config["fish_lsp"] = {}
+vim.lsp.enable("fish_lsp")
 -- setup ruff
 ruffconfig = function()
 	if Windows then
@@ -77,14 +76,14 @@ ruffconfig = function()
 		return HOME .. "/.config/ruff/ruff.toml"
 	end
 end
-require("lspconfig").ruff.setup({
+vim.lsp.config["ruff"] = {
 	init_options = {
 		settings = {
 			configurationPreference = "filesystemFirst",
 			configuration = ruffconfig(),
 		},
 	},
-})
+}
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 local nls = require("null-ls")
