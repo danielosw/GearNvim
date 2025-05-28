@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-telescope/telescope.nvim",
-		version = "*",
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
