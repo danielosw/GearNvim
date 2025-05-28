@@ -141,10 +141,35 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
 		build = ":TSUpdate",
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = "TSUpdate",
+		opts = {
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+			highlight = { enable = true },
+		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
+	},
+	{
+		"nvim-neorg/neorg",
+
+		version = "*", -- Pin Neorg to the latest stable release
+		lazy = false,
+		opts = {
+			load = {
+				["core.defaults"] = {},
+				["core.completion"] = { config = { engine = "nvim-cmp" } },
+				["core.concealer"] = {},
+				["core.dirman"] = {
+					config = {
+						workspaces = {
+							main = "~/notes",
+						},
+						index = "index.norg",
+					},
+				},
+			},
+		},
 	},
 
 	{

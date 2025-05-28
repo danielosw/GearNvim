@@ -93,26 +93,4 @@ return {
 		end,
 	},
 	-- comment out neorg till tree sitter is fixed
-	--[[	
-	{
-		"nvim-neorg/neorg",
-
-		version = "*", -- Pin Neorg to the latest stable release
-
-		opts = {
-			load = {
-				["core.defaults"] = {},
-				["core.completion"] = { config = { engine = "nvim-cmp" } },
-				["core.concealer"] = {},
-				["core.dirman"] = {
-					config = {
-						workspaces = {
-							main = "~/notes",
-						},
-						index = "index.norg",
-					},
-				},
-			},
-		},
-	}, ]]
 }
