@@ -17,7 +17,6 @@ if not vim.uv.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
 -- add mise shims to path if on linux and shims path exists
 if Windows ~= true and vim.uv.fs_stat("~/.local/share/mise/shims") then
 	vim.env.PATH = HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH

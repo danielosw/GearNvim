@@ -7,16 +7,22 @@ return {
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
-			library = { "lazy.nvim", "mason.nvim", "nvim-dap", "nvim-cmp" },
+			library = {
+				"lazy.nvim",
+				"mason.nvim",
+				"nvim-dap",
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "wezterm-types", mods = { "wezterm" } },
+			},
 		},
 	},
+	{ "justinsgithub/wezterm-types", ft = "lua" },
 	{
 		"stevearc/overseer.nvim",
 		opts = { templates = { "builtin" } },
 		event = { "BufReadPre", "BufNewFile" },
 		cmd = { "OverseerInfo" },
 	},
-
 	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false } },
 	{
 		"danielosw/nvim-lightbulb",
