@@ -5,5 +5,4 @@
  > Install requires Neovim 0.11 
 
 A Nvim config that's designed around customizability.  
-Also compatible with VSCode Neovim  
 You will need cmake, ripegrep, yarn and fzf.
