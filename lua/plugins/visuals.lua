@@ -168,6 +168,7 @@ return {
 						index = "index.norg",
 					},
 				},
+				["core.export"] = {},
 			},
 		},
 	},
