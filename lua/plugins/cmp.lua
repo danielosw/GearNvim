@@ -1,3 +1,33 @@
+local provide = function()
+	local provider = {
+		lazydev = {
+			name = "LazyDev",
+			module = "lazydev.integrations.blink",
+			-- make lazydev completions top priority (see `:h blink.cmp`)
+			score_offset = 100,
+		},
+	}
+	if EnableNeorg then
+		provider.neorg = {
+			name = "neorg",
+			module = "blink.compat.source",
+		}
+	end
+	return provider
+end
+local defualt = function()
+	local default2 = {
+		"lazydev",
+		"lsp",
+		"path",
+		"snippets",
+		"buffer",
+	}
+	if EnableNeorg then
+		default2[#default2 + 1] = "neorg"
+	end
+	return default2
+end
 return {
 	{
 		"saghen/blink.cmp",
@@ -26,7 +56,7 @@ return {
 			-- C-k: Toggle signature help (if signature.enabled = true)
 			--
 			-- See :h blink-cmp-config-keymap for defining your own keymap
-			keymap = { preset = "super-tab" },
+			keymap = { preset = "enter" },
 
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -51,26 +81,8 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = {
-					"lazydev",
-					"lsp",
-					"path",
-					"snippets",
-					"neorg",
-					"buffer",
-				},
-				providers = {
-					lazydev = {
-						name = "LazyDev",
-						module = "lazydev.integrations.blink",
-						-- make lazydev completions top priority (see `:h blink.cmp`)
-						score_offset = 100,
-					},
-					neorg = {
-						name = "neorg",
-						module = "blink.compat.source",
-					},
-				},
+				default = defualt(),
+				providers = provide(),
 			},
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
