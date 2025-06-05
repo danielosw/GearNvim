@@ -142,19 +142,18 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		branch = "main",
 		opts = {
 			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
 			highlight = { enable = true },
 		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
 	},
 	{
 		"nvim-neorg/neorg",
 
 		version = "*", -- Pin Neorg to the latest stable release
 		lazy = false,
+		cond = EnableNeorg,
 		opts = {
 			load = {
 				["core.defaults"] = {},

@@ -1,8 +1,10 @@
+EnableNeorg = false
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 -- Helper that calls some stuff once so we don't do it over and over
 require("helpers.callonce")
 if Windows then
 	-- set shell to powershell on windows.
+	--
 	vim.o.shell = "pwsh.exe"
 end
 -- install lazy if not installed already
@@ -25,6 +27,12 @@ end
 local g = vim.g
 local opt = vim.opt
 local o = vim.o
+-- set up clipboard
+if Windows ~= true then
+	o.clipboard = "unnamedplus"
+else
+	o.clipboard = "unnamed"
+end
 g.mapleader = ","
 g.maplocalleader = ","
 -- disable netrw because we are using NvimTree
@@ -40,6 +48,12 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "<filetype>" },
+	callback = function()
+		vim.treesitter.start()
+	end,
+})
 -- Disabling this to use tiny inline diagnostic
 vim.diagnostic.config({ virtual_text = false })
 -- terminal specific config options
