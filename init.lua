@@ -1,4 +1,18 @@
+-- MUST BE SET BEFORE PLUGIN LOADING
 EnableNeorg = false
+-- if theme.lua does not exist, make it to prevent a crash
+if not vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/config/theme.lua") then
+	local cat = "/lua/config/theme.lua"
+	if Windows then
+		cat = "\\lua\\config\\theme.lua"
+	end
+	local file = vim.uv.fs_open(vim.fn.stdpath("config") .. cat, "w+", 438)
+	print(file)
+	if file ~= nil then
+		-- not my fav theme but its common
+		vim.uv.fs_write(file, 'vim.cmd("colorscheme tokyonight-storm")')
+	end
+end
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 -- Helper that calls some stuff once so we don't do it over and over
 require("helpers.callonce")
@@ -54,8 +68,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.treesitter.start()
 	end,
 })
--- Disabling this to use tiny inline diagnostic
-vim.diagnostic.config({ virtual_text = false })
 -- terminal specific config options
 require("helpers.terms")
 
