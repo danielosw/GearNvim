@@ -1,12 +1,12 @@
 -- MUST BE SET BEFORE PLUGIN LOADING
 EnableNeorg = false
+-- Helper that calls some stuff once so we don't do it over and over
+require("lib.callonce")
 -- if theme.lua does not exist, make it to prevent a crash
 if not vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/config/theme.lua") then
-	local cat = "/lua/config/theme.lua"
-	if Windows then
-		cat = "\\lua\\config\\theme.lua"
-	end
+	local cat = RealPath("/lua/config/theme.lua")
 	local file = vim.uv.fs_open(vim.fn.stdpath("config") .. cat, "w+", 438)
+
 	print(file)
 	if file ~= nil then
 		-- not my fav theme but its common
@@ -14,8 +14,6 @@ if not vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/config/theme.lua") then
 	end
 end
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- Helper that calls some stuff once so we don't do it over and over
-require("helpers.callonce")
 if Windows then
 	-- set shell to powershell on windows.
 	--
@@ -69,7 +67,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 -- terminal specific config options
-require("helpers.terms")
+require("lib.terms")
 
 require("lazy").setup({
 	spec = {
@@ -87,7 +85,7 @@ require("lazy").setup({
 require("config.theme")
 -- load the configs
 -- dap helper to load dap configs on filetypes
-require("helpers.inittypes")
+require("lib.inittypes")
 -- config ui
 require("config.ui")
 -- Config mason and related

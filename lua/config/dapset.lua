@@ -21,11 +21,7 @@ local function setupDap(temp)
 					},
 				})
 			else
-				if Windows then
-					catpath = "\\venv\\scripts\\python"
-				else
-					catpath = "/venv/bin/python"
-				end
+				catpath = RealPath("/venv/bin/python")
 				cb({
 					type = "executable",
 					command = vim.fn.exepath("debugpy") .. catpath,
@@ -48,11 +44,7 @@ local function setupDap(temp)
 		}
 	end
 	if temp == "firefox-debug-adapter" then
-		if Windows then
-			catpath = "\\dist\\adapter.bundle.js"
-		else
-			catpath = "/dist/adapter.bundle.js"
-		end
+		catpath = RealPath("/dist/adapter.bundle.js")
 		Dap.adapters.firefox = {
 			type = "executable",
 			command = "node",

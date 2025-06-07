@@ -23,6 +23,13 @@ local function Iswindows()
 		return false
 	end
 end
+function RealPath(path)
+	if Windows then
+		-- convert unix to windons
+		return path:gsub("/", "\\")
+	end
+	return path
+end
 function Map(iter, func)
 	do
 		local toReturn = {}

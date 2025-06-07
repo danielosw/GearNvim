@@ -34,11 +34,7 @@ local themepick = function(opts)
 					-- write scheme to file
 					local file = "dummy.lua"
 					local folder = vim.fn.stdpath("config")
-					if Windows then
-						file = folder .. "\\lua\\config\\theme.lua"
-					else
-						file = folder .. "/lua/config/theme.lua"
-					end
+					file = folder .. RealPath("/lua/config/theme.lua")
 					local filehandle = io.open(file, "w+")
 					if filehandle ~= nil then
 						filehandle.write(filehandle, 'vim.cmd("colorscheme ' .. selection[1] .. '")')
