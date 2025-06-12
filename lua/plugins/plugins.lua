@@ -1,12 +1,4 @@
 return {
-	{ "nvim-lua/plenary.nvim", lazy = true },
-
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		opts = {},
-		priority = 49,
-	},
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
 	{
 		"saecki/crates.nvim",

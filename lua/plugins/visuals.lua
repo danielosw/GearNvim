@@ -1,73 +1,3 @@
-local menuoption = {
-	{
-		name = "Format Buffer",
-		cmd = function()
-			require("conform").format({ async = true })
-		end,
-		rtxt = "<leader>f",
-	},
-
-	{
-		name = "Code Actions",
-		cmd = function()
-			require("actions-preview").code_actions()
-		end,
-		rtxt = "<leader>gf",
-	},
-
-	{ name = "separator" },
-
-	{
-		name = "  Lsp Actions",
-		hl = "Exblue",
-		items = "lsp",
-	},
-
-	{ name = "separator" },
-
-	{
-		name = "Edit Config",
-		cmd = function()
-			vim.cmd("tabnew")
-			vim.cmd(":e $MYVIMRC | :cd %:p:h | NvimTreeOpen | wincmd k | pwd<CR>")
-		end,
-	},
-
-	{
-		name = "Copy Content",
-		cmd = "yank",
-		rtxt = "<C-c>",
-	},
-	{
-		name = "Delete Content",
-		cmd = "%d",
-		rtxt = "dc",
-	},
-
-	{ name = "separator" },
-
-	{
-		name = "  Open in terminal",
-		hl = "ExRed",
-		cmd = function()
-			local old_buf = require("menu.state").old_data.buf
-			local old_bufname = vim.api.nvim_buf_get_name(old_buf)
-			local old_buf_dir = vim.fn.fnamemodify(old_bufname, ":h")
-
-			local cmd = "cd " .. old_buf_dir
-
-			-- base46_cache var is an indicator of nvui user!
-			if vim.g.base46_cache then
-				require("nvchad.term").new({ cmd = cmd, pos = "sp" })
-			else
-				vim.cmd("new")
-				vim.fn.termopen({ vim.o.shell, "-c", cmd .. " ; " .. vim.o.shell })
-			end
-		end,
-	},
-
-	{ name = "separator" },
-}
 return {
 	{
 		"MunifTanjim/nougat.nvim",
@@ -144,7 +74,7 @@ return {
 		build = ":TSUpdate",
 		branch = "main",
 		opts = {
-			ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "regex" },
 			highlight = { enable = true },
 		},
 	},

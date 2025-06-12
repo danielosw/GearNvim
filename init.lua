@@ -68,7 +68,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 -- terminal specific config options
 require("lib.terms")
-
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
@@ -81,6 +80,7 @@ require("lazy").setup({
 		},
 	},
 })
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
 -- load the configs
