@@ -23,8 +23,9 @@ local headers = {
 		[[██████  █████████████████████ ████ █████ █████ ████ ██████]],
 	},
 }
-
+-- randomly pick a header
 dashboard.section.header.val = headers[math.random(#headers)]
+-- randomly pick a quote
 dashboard.section.footer.val = Quotes[math.random(#Quotes)]
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),

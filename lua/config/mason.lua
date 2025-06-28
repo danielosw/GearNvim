@@ -12,6 +12,7 @@ local on_attach = function(client, bufnr)
 		navic.attach(client, bufnr)
 		navbud.attach(client, bufnr)
 	end
+	-- enable inlay hints if possible
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true)
 	end
@@ -64,9 +65,6 @@ for _, pkg_info in ipairs(Mason_registry.get_installed_packages()) do
 	end
 end
 
--- setup fish-lsp
-vim.lsp.config["fish_lsp"] = {}
-vim.lsp.enable("fish_lsp")
 -- setup ruff
 ruffconfig = function()
 	if Windows then
@@ -85,6 +83,7 @@ vim.lsp.config["ruff"] = {
 }
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
+-- nls setup
 local nls = require("null-ls")
 nls.register(nls.builtins.diagnostics.mypy.with({
 	extra_args = function()

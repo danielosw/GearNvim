@@ -48,7 +48,8 @@ function ForEach(iter, func)
 end
 
 HOME = vim.env.HOME
-ConfigPath = vim.fn.stdpath("config")
 Term = vim.env.TERM
 Windows = Iswindows()
 PythonPath = getPython()
+ConfigPath = vim.fn.stdpath("config")
+DataPath = vim.fn.stdpath("data")

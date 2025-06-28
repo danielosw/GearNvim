@@ -3,10 +3,21 @@ return {
 	{ "catppuccin/nvim", name = "catppuccin", priority = 200 },
 	{ "folke/tokyonight.nvim", priority = 200 },
 	{ "EdenEast/nightfox.nvim", priority = 200 },
+	{ "nyoom-engineering/oxocarbon.nvim", priority = 200 },
 	{
 		"Mofiqul/dracula.nvim",
 		priority = 200,
 		opts = Termconf.draculaopts,
+	},
+	{
+		"olimorris/onedarkpro.nvim",
+		priority = 200,
+	},
+	{
+		"uloco/bluloco.nvim",
+		lazy = false,
+		priority = 1000,
+		dependencies = { "rktjmp/lush.nvim" },
 	},
 	{
 		"scottmckendry/cyberdream.nvim",
@@ -89,5 +100,10 @@ return {
 				...,
 			},
 		},
+	},
+	{ "rktjmp/shipwright.nvim" },
+	{
+		"rktjmp/lush.nvim",
+		-- if you wish to use your own colorscheme:
 	},
 }
