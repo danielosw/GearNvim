@@ -1,21 +1,22 @@
+-- set to true to change lazy config for debugging/optimising
+-- has no real use besides this
+local debuglazy = false
 -- MUST BE SET BEFORE PLUGIN LOADING
+-- if true enables neorg and related things.
+-- false because neorg + treesitter is broken
 EnableNeorg = false
+-- Helper that calls some stuff once so we don't do it over and over
+require("lib.callonce")
 -- if theme.lua does not exist, make it to prevent a crash
-if not vim.uv.fs_stat(vim.fn.stdpath("config") .. "/lua/config/theme.lua") then
-	local cat = "/lua/config/theme.lua"
-	if Windows then
-		cat = "\\lua\\config\\theme.lua"
-	end
-	local file = vim.uv.fs_open(vim.fn.stdpath("config") .. cat, "w+", 438)
-	print(file)
+if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
+	local cat = RealPath("/lua/config/theme.lua")
+	local file = vim.uv.fs_open(ConfigPath .. cat, "w+", 438)
 	if file ~= nil then
 		-- not my fav theme but its common
 		vim.uv.fs_write(file, 'vim.cmd("colorscheme tokyonight-storm")')
 	end
 end
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
--- Helper that calls some stuff once so we don't do it over and over
-require("helpers.callonce")
+local lazypath = DataPath .. "/lazy/lazy.nvim"
 if Windows then
 	-- set shell to powershell on windows.
 	--
@@ -47,14 +48,17 @@ if Windows ~= true then
 else
 	o.clipboard = "unnamed"
 end
+-- set leader key to ,
 g.mapleader = ","
 g.maplocalleader = ","
 -- disable netrw because we are using NvimTree
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
+-- enable experimental loader
 vim.loader.enable()
+-- disable this if you use a terminal that does not support it
 opt.termguicolors = true
--- Disabling default style's
+-- Disabling default style's because I don't like them
 g.python_recommended_style = 0
 g.rust_recommended_style = 0
 -- Enabling tabs and setting their size
@@ -69,9 +73,9 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 -- terminal specific config options
-require("helpers.terms")
+require("lib.terms")
 
-require("lazy").setup({
+local lazydefault = {
 	spec = {
 		{ import = "plugins" },
 	},
@@ -82,12 +86,21 @@ require("lazy").setup({
 			},
 		},
 	},
-})
+}
+if debuglazy then
+	lazydefault.profiling = {
+		loader = true,
+		require = true,
+	}
+end
+require("lazy").setup(lazydefault)
+-- treesitter indent guide
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
 -- load the configs
 -- dap helper to load dap configs on filetypes
-require("helpers.inittypes")
+require("lib.inittypes")
 -- config ui
 require("config.ui")
 -- Config mason and related
@@ -97,8 +110,6 @@ require("config.mason")
 require("config.conform")
 -- setup dap, MUST HAPPEN AFTER MASON CONFIG
 require("config.dapset")
--- setup cmp and snippets
-require("config.cmp")
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size

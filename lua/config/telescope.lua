@@ -6,15 +6,17 @@ local action_state = require("telescope.actions.state")
 local previewers = require("telescope.previewers")
 -- get colorschemes
 local schemes = function()
+	-- get a list of all color schemes
 	local themes = {}
 	for _, value in pairs(vim.fn.getcompletion("", "color")) do
 		themes[#themes + 1] = value
 	end
 	return themes
 end
-
+-- custom theme picker
 local themepick = function(opts)
 	local set = false
+	-- get background to restor
 	local before_background = vim.g.colors_name or "vim"
 	local bufnr = vim.api.nvim_get_current_buf()
 	local p = vim.api.nvim_buf_get_name(bufnr)
@@ -33,12 +35,8 @@ local themepick = function(opts)
 					vim.cmd("colorscheme " .. selection[1])
 					-- write scheme to file
 					local file = "dummy.lua"
-					local folder = vim.fn.stdpath("config")
-					if Windows then
-						file = folder .. "\\lua\\config\\theme.lua"
-					else
-						file = folder .. "/lua/config/theme.lua"
-					end
+					local folder = ConfigPath
+					file = folder .. RealPath("/lua/config/theme.lua")
 					local filehandle = io.open(file, "w+")
 					if filehandle ~= nil then
 						filehandle.write(filehandle, 'vim.cmd("colorscheme ' .. selection[1] .. '")')
@@ -50,6 +48,7 @@ local themepick = function(opts)
 				end)
 				return true
 			end,
+			-- preview change
 			previewer = previewers.new_buffer_previewer({
 				define_preview = function(self, entry)
 					if vim.loop.fs_stat(p) then
@@ -58,7 +57,7 @@ local themepick = function(opts)
 						local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 						vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 					end
-
+					-- this is why we need to restor
 					vim.cmd("colorscheme " .. entry[1])
 				end,
 
@@ -66,6 +65,7 @@ local themepick = function(opts)
 					return p
 				end,
 				teardown = function(self)
+					-- restore if we did not set a scheme
 					if not set then
 						vim.cmd("colorscheme " .. before_background)
 					end
