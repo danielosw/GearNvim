@@ -88,21 +88,9 @@ local lazydefault = {
 	},
 }
 if debuglazy then
-	lazydefault = {
-		spec = {
-			{ import = "plugins" },
-		},
-		performance = {
-			rtp = {
-				disabled_plugins = {
-					"netrwPlugin",
-				},
-			},
-		},
-		profiling = {
-			loader = true,
-			require = true,
-		},
+	lazydefault.profiling = {
+		loader = true,
+		require = true,
 	}
 end
 require("lazy").setup(lazydefault)
@@ -122,8 +110,6 @@ require("config.mason")
 require("config.conform")
 -- setup dap, MUST HAPPEN AFTER MASON CONFIG
 require("config.dapset")
--- setup cmp and snippets
-require("config.cmp")
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size

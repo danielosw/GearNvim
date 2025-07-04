@@ -1,4 +1,3 @@
-local Mason_registry = require("mason-registry")
 local dapui = require("dapui")
 Dap = require("dap")
 Dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -21,7 +20,7 @@ local function setupDap(temp)
 					},
 				})
 			else
-				catpath = RealPath("/venv/bin/python")
+				local catpath = RealPath("/venv/bin/python")
 				cb({
 					type = "executable",
 					command = vim.fn.exepath("debugpy") .. catpath,
@@ -44,7 +43,7 @@ local function setupDap(temp)
 		}
 	end
 	if temp == "firefox-debug-adapter" then
-		catpath = RealPath("/dist/adapter.bundle.js")
+		local catpath = RealPath("/dist/adapter.bundle.js")
 		Dap.adapters.firefox = {
 			type = "executable",
 			command = "node",
@@ -52,6 +51,12 @@ local function setupDap(temp)
 		}
 	end
 end
+local daps = { "firefox-debug-adapter", "debugpy", "codelldb" }
+local function dapexists(dap)
+	if vim.fn.executable(dap) then
+		setupDap(dap)
+	end
+end
 
 -- Get a list of all installed daps and setup any found
-ForEach(Daps, setupDap)
+ForEach(daps, dapexists)
