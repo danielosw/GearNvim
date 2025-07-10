@@ -2,17 +2,20 @@ Cwd = vim.fn.getcwd()
 local execute = vim.fn.executable
 local function getPython()
 	do
-		if execute(Cwd .. "/.venv/bin/python") == 1 then
-			return Cwd .. "/.venv/bin/python"
-		elseif execute(Cwd .. "/venv/bin/python") == 1 then
-			return Cwd .. "/venv/bin/python"
-		elseif execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
-			return Cwd .. "\\.venv\\Scripts\\python.exe"
-		elseif execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
-			return Cwd .. "\\.venv\\Scripts\\python.exe"
+		if Windows then
+			if execute(Cwd .. "/.venv/bin/python") == 1 then
+				return Cwd .. "/.venv/bin/python"
+			elseif execute(Cwd .. "/venv/bin/python") == 1 then
+				return Cwd .. "/venv/bin/python"
+			end
 		else
-			return vim.fn.exepath("python")
+			if execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
+				return Cwd .. "\\.venv\\Scripts\\python.exe"
+			elseif execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
+				return Cwd .. "\\.venv\\Scripts\\python.exe"
+			end
 		end
+		return vim.fn.exepath("python")
 	end
 end
 
