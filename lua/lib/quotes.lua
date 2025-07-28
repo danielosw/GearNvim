@@ -12,6 +12,7 @@ local inspire = {
 	"Strive for progress.",
 	"Nothing about us without us.",
 	"Even the waves of fate can break upon the shores of will.",
+	"Should the lights go out and all laws flee, you will get where you are going.",
 }
 if Inspire then
 	for _, v in ipairs(inspire) do

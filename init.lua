@@ -3,7 +3,7 @@
 local debuglazy = false
 -- MUST BE SET BEFORE PLUGIN LOADING
 -- if true enables neorg and related things.
--- false because neorg + treesitter is broken
+-- false because you need to manually install neorg treesitter to get it to work
 EnableNeorg = false
 -- Helper that calls some stuff once so we don't do it over and over
 require("lib.callonce")
@@ -19,7 +19,6 @@ end
 local lazypath = DataPath .. "/lazy/lazy.nvim"
 if Windows then
 	-- set shell to powershell on windows.
-	--
 	vim.o.shell = "pwsh.exe"
 end
 -- install lazy if not installed already
@@ -93,6 +92,9 @@ if debuglazy then
 		require = true,
 	}
 end
+lazydefault.dev = {
+	path = "~/projects/neovimplugins",
+}
 require("lazy").setup(lazydefault)
 -- treesitter indent guide
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
@@ -104,7 +106,6 @@ require("lib.inittypes")
 -- config ui
 require("config.ui")
 -- Config mason and related
--- TODO: rename and split up this config
 require("config.mason")
 -- setup conform
 require("config.conform")

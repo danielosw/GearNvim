@@ -79,9 +79,8 @@ return {
 		},
 	},
 	{
-		"nvim-neorg/neorg",
+		"danielosw/neorg",
 
-		version = "*", -- Pin Neorg to the latest stable release
 		lazy = false,
 		cond = EnableNeorg,
 		opts = {
