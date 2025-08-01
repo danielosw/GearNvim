@@ -10,7 +10,7 @@ end
 
 -- You can setup any custom logic for font's here
 local function getFont()
-	return "CaskaydiaCove NF"
+	return "CaskaydiaCove NF:h12"
 end
 
 o.guifont = getFont()
