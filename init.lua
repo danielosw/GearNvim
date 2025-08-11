@@ -16,6 +16,7 @@ if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 		vim.uv.fs_write(file, 'vim.cmd("colorscheme tokyonight-storm")')
 	end
 end
+
 local lazypath = DataPath .. "/lazy/lazy.nvim"
 if Windows then
 	-- set shell to powershell on windows.
@@ -95,6 +96,10 @@ end
 lazydefault.dev = {
 	path = "~/projects/neovimplugins",
 }
+-- if we are using neovide load neovide specific options
+if vim.g.neovide then
+	require("config.neovide")
+end
 require("lazy").setup(lazydefault)
 -- treesitter indent guide
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
@@ -117,7 +122,3 @@ require("config.keybinds")
 require("config.alpha")
 -- load custom pickers
 require("config.telescope")
--- if we are using neovide load neovide specific options
-if vim.g.neovide then
-	require("config.neovide")
-end
