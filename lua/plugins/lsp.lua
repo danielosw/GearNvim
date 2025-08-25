@@ -12,12 +12,10 @@ return {
 				"mason.nvim",
 				"nvim-dap",
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-				{ path = "wezterm-types", mods = { "wezterm" } },
 				"lush.nvim",
 			},
 		},
 	},
-	{ "justinsgithub/wezterm-types", ft = "lua" },
 	{
 		"stevearc/overseer.nvim",
 		opts = { templates = { "builtin" } },

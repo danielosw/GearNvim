@@ -1,9 +1,11 @@
 return {
 	{
-		"MunifTanjim/nougat.nvim",
-		config = function()
-			require("config.nougat")
-		end,
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			theme = "auto",
+			extensions = { "nvim-tree", "lazy" },
+		},
 	},
 	{
 		"hiphish/rainbow-delimiters.nvim",
@@ -79,9 +81,8 @@ return {
 		},
 	},
 	{
-		"nvim-neorg/neorg",
+		"danielosw/neorg",
 
-		version = "*", -- Pin Neorg to the latest stable release
 		lazy = false,
 		cond = EnableNeorg,
 		opts = {
