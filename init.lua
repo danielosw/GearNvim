@@ -106,10 +106,6 @@ vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
 -- load the configs
--- load windows if windows
-if Windows then
-	require("config.windows")
-end
 -- dap helper to load dap configs on filetypes
 require("lib.inittypes")
 -- config ui
