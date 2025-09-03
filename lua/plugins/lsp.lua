@@ -16,12 +16,6 @@ return {
 			},
 		},
 	},
-	{
-		"stevearc/overseer.nvim",
-		opts = { templates = { "builtin" } },
-		event = { "BufReadPre", "BufNewFile" },
-		cmd = { "OverseerInfo" },
-	},
 	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false } },
 	{
 		"kosayoda/nvim-lightbulb",
