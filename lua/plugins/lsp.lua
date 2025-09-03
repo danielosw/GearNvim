@@ -24,7 +24,7 @@ return {
 	},
 	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false } },
 	{
-		"danielosw/nvim-lightbulb",
+		"kosayoda/nvim-lightbulb",
 		opts = {
 			autocmd = { enabled = true },
 			ignore = {

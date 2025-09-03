@@ -29,6 +29,7 @@ end
 function RealPath(path)
 	if Windows then
 		-- convert unix to windons
+		-- this *may* break some weird paths but hopefully that won't happen
 		return path:gsub("/", "\\")
 	end
 	return path
