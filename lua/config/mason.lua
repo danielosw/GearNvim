@@ -54,8 +54,10 @@ lspconfig["rust_analyzer"].setup({
 
 	on_attach = on_attach,
 	settings = {
-		checkOnSave = {
-			command = "clippy",
+		["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
+			},
 		},
 	},
 })
