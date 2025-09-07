@@ -21,11 +21,11 @@ end
 
 local servers = mason_lspconfig.get_installed_servers()
 for i, name in ipairs(servers) do
-	if name ~= "pylsp" then
+	if name ~= "pylsp" and name ~= "rust_analyzer" then
 		lspconfig[name].setup({
 			on_attach = on_attach,
 		})
-	else
+	elseif name == "pylsp" then
 		lspconfig[name].setup({
 			on_attach = on_attach,
 			settings = {
@@ -50,7 +50,17 @@ for i, name in ipairs(servers) do
 		})
 	end
 end
+lspconfig["rust_analyzer"].setup({
 
+	on_attach = on_attach,
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
+			},
+		},
+	},
+})
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 -- nls setup
