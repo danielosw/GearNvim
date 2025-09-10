@@ -2,7 +2,7 @@ Cwd = vim.fn.getcwd()
 local execute = vim.fn.executable
 local function getPython()
 	do
-		if Windows then
+		if not Windows then
 			if execute(Cwd .. "/.venv/bin/python") == 1 then
 				return Cwd .. "/.venv/bin/python"
 			elseif execute(Cwd .. "/venv/bin/python") == 1 then
