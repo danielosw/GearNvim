@@ -15,7 +15,7 @@ Termconf = {
 -- ghostty has a slightly different dracula scheme so I do this to make it match
 if Term == "xterm-ghostty" then
 	Termconf.draculaopts.overrides.Normal = { bg = "#21222C" }
-elseif Term == "wezterm" then
+elseif Term == "wezterm" and Windows then
 	-- just for windows
 	vim.o.termguicolors = true
 end
