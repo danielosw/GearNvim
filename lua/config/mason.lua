@@ -17,13 +17,10 @@ local on_attach = function(client, bufnr)
 		vim.lsp.inlay_hint.enable(true)
 	end
 end
-
+vim.lsp.config("*", { on_attach = on_attach })
 local servers = mason_lspconfig.get_installed_servers()
 for i, name in ipairs(servers) do
 	if name ~= "pylsp" and name ~= "rust_analyzer" then
-		vim.lsp.config(name, {
-			on_attach = on_attach,
-		})
 		vim.lsp.enable(name)
 	elseif name == "pylsp" then
 		vim.lsp.config(name, {
@@ -51,7 +48,7 @@ for i, name in ipairs(servers) do
 		vim.lsp.enable(name)
 	end
 end
-vim.lsp.config("rust-analyzer", {
+vim.lsp.config("rust_analyzer", {
 	on_attach = on_attach,
 	settings = {
 		["rust-analyzer"] = {
@@ -61,7 +58,7 @@ vim.lsp.config("rust-analyzer", {
 		},
 	},
 })
-vim.lsp.enable("rust-analyzer")
+vim.lsp.enable("rust_analyzer")
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 -- nls setup
