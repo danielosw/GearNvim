@@ -1,7 +1,6 @@
 return {
 	"nvimtools/none-ls.nvim",
 	"jay-babu/mason-null-ls.nvim",
-	"neovim/nvim-lspconfig",
 	{ "williamboman/mason.nvim", lazy = true },
 	{
 		"folke/lazydev.nvim",

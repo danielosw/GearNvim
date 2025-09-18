@@ -5,7 +5,6 @@ local mason_lspconfig = require("mason-lspconfig")
 Mason_registry = require("mason-registry")
 local navic = require("nvim-navic")
 local navbud = require("nvim-navbuddy")
-local lspconfig = require("lspconfig")
 -- lsp on attach
 local on_attach = function(client, bufnr)
 	-- navic
@@ -22,11 +21,12 @@ end
 local servers = mason_lspconfig.get_installed_servers()
 for i, name in ipairs(servers) do
 	if name ~= "pylsp" and name ~= "rust_analyzer" then
-		lspconfig[name].setup({
+		vim.lsp.config(name, {
 			on_attach = on_attach,
 		})
+		vim.lsp.enable(name)
 	elseif name == "pylsp" then
-		lspconfig[name].setup({
+		vim.lsp.config(name, {
 			on_attach = on_attach,
 			settings = {
 				plugins = {
@@ -48,10 +48,10 @@ for i, name in ipairs(servers) do
 				},
 			},
 		})
+		vim.lsp.enable(name)
 	end
 end
-lspconfig["rust_analyzer"].setup({
-
+vim.lsp.config("rust-analyzer", {
 	on_attach = on_attach,
 	settings = {
 		["rust-analyzer"] = {
@@ -61,6 +61,7 @@ lspconfig["rust_analyzer"].setup({
 		},
 	},
 })
+vim.lsp.enable("rust-analyzer")
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
 -- nls setup
