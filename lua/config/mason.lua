@@ -18,36 +18,6 @@ local on_attach = function(client, bufnr)
 	end
 end
 vim.lsp.config("*", { on_attach = on_attach })
-local servers = mason_lspconfig.get_installed_servers()
-for i, name in ipairs(servers) do
-	if name ~= "pylsp" and name ~= "rust_analyzer" then
-		vim.lsp.enable(name)
-	elseif name == "pylsp" then
-		vim.lsp.config(name, {
-			on_attach = on_attach,
-			settings = {
-				plugins = {
-					autopep8 = {
-						enabled = false,
-					},
-					mccabe = {
-						enabled = false,
-					},
-					pycodestyle = {
-						enabled = false,
-					},
-					pyflakes = {
-						enabled = false,
-					},
-					yapf = {
-						enabled = false,
-					},
-				},
-			},
-		})
-		vim.lsp.enable(name)
-	end
-end
 vim.lsp.config("rust_analyzer", {
 	on_attach = on_attach,
 	settings = {
@@ -58,6 +28,34 @@ vim.lsp.config("rust_analyzer", {
 		},
 	},
 })
+vim.lsp.config("pylsp", {
+	on_attach = on_attach,
+	settings = {
+		plugins = {
+			autopep8 = {
+				enabled = false,
+			},
+			mccabe = {
+				enabled = false,
+			},
+			pycodestyle = {
+				enabled = false,
+			},
+			pyflakes = {
+				enabled = false,
+			},
+			yapf = {
+				enabled = false,
+			},
+		},
+	},
+})
+
+local servers = mason_lspconfig.get_installed_servers()
+for i, name in ipairs(servers) do
+	vim.lsp.enable(name)
+end
+
 vim.lsp.enable("rust_analyzer")
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
