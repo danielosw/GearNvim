@@ -1,24 +1,30 @@
 Cwd = vim.fn.getcwd()
 local execute = vim.fn.executable
 local function getPython()
-	if not Windows then
-		if execute(Cwd .. "/.venv/bin/python") == 1 then
-			return Cwd .. "/.venv/bin/python"
-		elseif execute(Cwd .. "/venv/bin/python") == 1 then
-			return Cwd .. "/venv/bin/python"
+	do
+		if not Windows then
+			if execute(Cwd .. "/.venv/bin/python") == 1 then
+				return Cwd .. "/.venv/bin/python"
+			elseif execute(Cwd .. "/venv/bin/python") == 1 then
+				return Cwd .. "/venv/bin/python"
+			end
+		else
+			if execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
+				return Cwd .. "\\.venv\\Scripts\\python.exe"
+			elseif execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
+				return Cwd .. "\\.venv\\Scripts\\python.exe"
+			end
 		end
-	else
-		if execute(Cwd .. "\\.venv\\Scripts\\python.exe") == 1 then
-			return Cwd .. "\\.venv\\Scripts\\python.exe"
-		elseif execute(Cwd .. "\\venv\\Scripts\\python.exe") == 1 then
-			return Cwd .. "\\venv\\Scripts\\python.exe"
-		end
+		return vim.fn.exepath("python")
 	end
-	return vim.fn.exepath("python")
 end
 
 local function Iswindows()
-	return package.config:sub(1, 1) == "\\"
+	if package.config:sub(1, 1) == "\\" then
+		return true
+	else
+		return false
+	end
 end
 function RealPath(path)
 	if Windows then
@@ -29,15 +35,19 @@ function RealPath(path)
 	return path
 end
 function Map(iter, func)
-	local toReturn = {}
-	for _, value in ipairs(iter) do
-		toReturn[#toReturn + 1] = func(value)
+	do
+		local toReturn = {}
+		for _, value in ipairs(iter) do
+			toReturn[#toReturn + 1] = func(value)
+		end
+		return toReturn
 	end
-	return toReturn
 end
 function ForEach(iter, func)
-	for _, value in ipairs(iter) do
-		func(value)
+	do
+		for _, value in ipairs(iter) do
+			func(value)
+		end
 	end
 end
 
