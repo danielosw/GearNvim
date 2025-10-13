@@ -85,6 +85,11 @@ local lazydefault = {
 		rtp = {
 			disabled_plugins = {
 				"netrwPlugin",
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
 			},
 		},
 	},
@@ -107,20 +112,24 @@ require("lazy").setup(lazydefault)
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
--- load the configs
--- dap helper to load dap configs on filetypes
-require("lib.inittypes")
--- config ui
-require("config.ui")
--- Config mason and related
-require("config.mason")
--- setup conform
-require("config.conform")
--- setup dap, MUST HAPPEN AFTER MASON CONFIG
-require("config.dapset")
--- setup keybinds
-require("config.keybinds")
--- setup alpha, in its own file due to size
-require("config.alpha")
--- load custom pickers
-require("config.telescope")
+
+-- Defer loading of non-critical configs
+vim.schedule(function()
+	-- load the configs
+	-- dap helper to load dap configs on filetypes
+	require("lib.inittypes")
+	-- config ui
+	require("config.ui")
+	-- Config mason and related
+	require("config.mason")
+	-- setup conform
+	require("config.conform")
+	-- setup dap, MUST HAPPEN AFTER MASON CONFIG
+	require("config.dapset")
+	-- setup keybinds
+	require("config.keybinds")
+	-- setup alpha, in its own file due to size
+	require("config.alpha")
+	-- load custom pickers
+	require("config.telescope")
+end)

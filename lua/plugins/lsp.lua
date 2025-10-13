@@ -1,7 +1,7 @@
 return {
-	"nvimtools/none-ls.nvim",
-	"jay-babu/mason-null-ls.nvim",
-	"neovim/nvim-lspconfig",
+	{ "nvimtools/none-ls.nvim", event = { "BufReadPre", "BufNewFile" } },
+	{ "jay-babu/mason-null-ls.nvim", lazy = true },
+	{ "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
 	{ "williamboman/mason.nvim", lazy = true },
 	{
 		"folke/lazydev.nvim",
