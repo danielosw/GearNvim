@@ -1,27 +1,34 @@
 return {
 
-	{ "catppuccin/nvim", name = "catppuccin", priority = 200 },
-	{ "folke/tokyonight.nvim", priority = 200 },
-	{ "EdenEast/nightfox.nvim", priority = 200 },
-	{ "nyoom-engineering/oxocarbon.nvim", priority = 200 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 200, lazy = true },
+	{ 
+		"folke/tokyonight.nvim", 
+		priority = 1000,
+		lazy = false, -- Keep one theme non-lazy for initial load
+	},
+	{ "EdenEast/nightfox.nvim", priority = 200, lazy = true },
+	{ "nyoom-engineering/oxocarbon.nvim", priority = 200, lazy = true },
 	{
 		"Mofiqul/dracula.nvim",
 		priority = 200,
+		lazy = true,
 		opts = Termconf.draculaopts,
 	},
 	{
 		"olimorris/onedarkpro.nvim",
 		priority = 200,
+		lazy = true,
 	},
 	{
 		"uloco/bluloco.nvim",
-		lazy = false,
-		priority = 1000,
+		lazy = true,
+		priority = 200,
 		dependencies = { "rktjmp/lush.nvim" },
 	},
 	{
 		"scottmckendry/cyberdream.nvim",
-		priority = 1000,
+		priority = 200,
+		lazy = true,
 		opts = {
 			variant = "default", -- use "light" for the light variant. Also accepts "auto" to set dark or light colors based on the current value of `vim.o.background`
 
@@ -101,9 +108,10 @@ return {
 			},
 		},
 	},
-	{ "rktjmp/shipwright.nvim" },
+	{ "rktjmp/shipwright.nvim", lazy = true },
 	{
 		"rktjmp/lush.nvim",
+		lazy = true,
 		-- if you wish to use your own colorscheme:
 	},
 }
