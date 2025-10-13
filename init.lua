@@ -68,6 +68,7 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
+Pickerloaded = false
 -- terminal specific config options
 require("lib.terms")
 
@@ -117,4 +118,12 @@ require("config.keybinds")
 -- setup alpha, in its own file due to size
 require("config.alpha")
 -- load custom pickers
-require("config.telescope")
+-- wrapper to lazy load the function so telescope can be lazyloaded
+local function pickwrapper()
+	if Pickerloaded == false then
+		require("config.telescope")
+		Pickerloaded = true
+	end
+	Themepick()
+end
+vim.api.nvim_create_user_command("Themes", pickwrapper, { desc = "theme picker" })
