@@ -128,8 +128,6 @@ vim.schedule(function()
 	require("config.dapset")
 	-- setup keybinds
 	require("config.keybinds")
-	-- setup alpha, in its own file due to size
-	require("config.alpha")
 	-- load custom pickers
 	require("config.telescope")
 end)
