@@ -10,7 +10,6 @@ return {
 			library = {
 				"lazy.nvim",
 				"mason.nvim",
-				"nvim-dap",
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				"lush.nvim",
 			},

@@ -1,6 +1,6 @@
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
-local debuglazy = false
+local debuglazy = true
 -- MUST BE SET BEFORE PLUGIN LOADING
 -- if true enables neorg and related things.
 -- false because you need to manually install neorg treesitter to get it to work
@@ -103,8 +103,6 @@ vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
 -- load the configs
--- dap helper to load dap configs on filetypes
-require("lib.inittypes")
 -- config ui
 require("config.ui")
 -- Config mason and related
@@ -112,7 +110,6 @@ require("config.mason")
 -- setup conform
 require("config.conform")
 -- setup dap, MUST HAPPEN AFTER MASON CONFIG
-require("config.dapset")
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size
