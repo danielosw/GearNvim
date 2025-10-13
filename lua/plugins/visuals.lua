@@ -117,8 +117,8 @@ return {
 			local dashboard = require("alpha.themes.dashboard")
 			-- Safely load quotes module
 			local quotes_ok, _ = pcall(require, "lib.quotes")
-			if not quotes_ok or not Quotes or #Quotes == 0 then
-				Quotes = { "Welcome to Neovim!" }
+			if not quotes_ok or not _G.Quotes or #_G.Quotes == 0 then
+				_G.Quotes = { "Welcome to Neovim!" }
 			end
 			local headers = {
 				{
@@ -145,7 +145,7 @@ return {
 			-- randomly pick a header
 			dashboard.section.header.val = headers[math.random(#headers)]
 			-- randomly pick a quote
-			dashboard.section.footer.val = Quotes[math.random(#Quotes)]
+			dashboard.section.footer.val = _G.Quotes[math.random(#_G.Quotes)]
 			dashboard.section.buttons.val = {
 				dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
 				dashboard.button("f", "󰱼  > Find file", ":Telescope find_files<CR>"),
