@@ -115,7 +115,11 @@ return {
 		config = function()
 			local alpha = require("alpha")
 			local dashboard = require("alpha.themes.dashboard")
-			require("lib.quotes")
+			-- Safely load quotes module
+			local quotes_ok, _ = pcall(require, "lib.quotes")
+			if not quotes_ok or not Quotes or #Quotes == 0 then
+				Quotes = { "Welcome to Neovim!" }
+			end
 			local headers = {
 				{
 					"                                                     ",

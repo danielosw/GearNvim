@@ -25,7 +25,11 @@ return {
 			},
 		},
 	},
-	{ "jay-babu/mason-nvim-dap.nvim", lazy = true },
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+		lazy = true,
+	},
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
