@@ -1,4 +1,14 @@
+--[[
+Debug Adapter Protocol (DAP) plugin configuration.
+This file configures:
+- nvim-dap: Core DAP implementation
+- Mason integration for DAP adapters
+- dap-ui: Graphical debugging interface
+- Debug keybindings for starting, stopping, and managing breakpoints
+]]
+
 return {
+	-- Core DAP plugin for debugging
 	{
 		"mfussenegger/nvim-dap",
 		keys = {
@@ -30,7 +40,10 @@ return {
 		end,
 		lazy = true,
 	},
+	-- Mason integration for installing debug adapters
 	{ "jay-babu/mason-nvim-dap.nvim", lazy = true },
+	
+	-- Graphical UI for nvim-dap
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },

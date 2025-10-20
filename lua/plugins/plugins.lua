@@ -1,10 +1,23 @@
+--[[
+General plugins configuration.
+This file defines various utility plugins for Neovim including:
+- Auto-pairing brackets and quotes
+- Rust crate management
+- Text substitution utilities
+- Snippet management
+- File navigation and search
+]]
+
 return {
+	-- Automatically insert closing brackets, quotes, etc.
 	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	-- Rust crate version management and information
 	{
 		"saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
 		opts = {},
 	},
+	-- Fast text substitution using ripgrep
 	{
 		"chrisgrieser/nvim-rip-substitute",
 		cmd = "RipSubstitute",
@@ -20,6 +33,7 @@ return {
 			},
 		},
 	},
+	-- Snippet editing and management
 	{
 		"chrisgrieser/nvim-scissors",
 		dependencies = "nvim-telescope/telescope.nvim",
@@ -46,6 +60,7 @@ return {
 			snippetDir = ConfigPath .. "/snippets",
 		},
 	},
+	-- Code formatting plugin
 	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },

@@ -1,24 +1,45 @@
-return {
+--[[
+Colorscheme/theme plugin definitions.
+This file configures various color themes for Neovim.
+Priority is set high (200+) to ensure themes load early.
+Use :Themes command to interactively switch between themes.
+]]
 
+return {
+	-- Catppuccin: Soothing pastel theme with multiple flavors
 	{ "catppuccin/nvim", name = "catppuccin", priority = 200 },
+	
+	-- Tokyo Night: Clean and elegant dark theme
 	{ "folke/tokyonight.nvim", priority = 200 },
+	
+	-- Nightfox: Highly customizable fox-themed colorschemes
 	{ "EdenEast/nightfox.nvim", priority = 200 },
+	
+	-- Oxocarbon: IBM Carbon-inspired dark theme
 	{ "nyoom-engineering/oxocarbon.nvim", priority = 200 },
+	
+	-- Dracula: Dark theme inspired by Dracula color palette
 	{
 		"Mofiqul/dracula.nvim",
 		priority = 200,
 		opts = Termconf.draculaopts,
 	},
+	
+	-- OneDark Pro: Atom's iconic One Dark theme
 	{
 		"olimorris/onedarkpro.nvim",
 		priority = 200,
 	},
+	
+	-- Bluloco: Blue-based theme with light and dark variants
 	{
 		"uloco/bluloco.nvim",
 		lazy = false,
 		priority = 1000,
 		dependencies = { "rktjmp/lush.nvim" },
 	},
+	
+	-- Cyberdream: Modern cyberpunk-inspired theme
 	{
 		"scottmckendry/cyberdream.nvim",
 		priority = 1000,

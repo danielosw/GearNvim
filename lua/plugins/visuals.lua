@@ -1,4 +1,15 @@
+--[[
+Visual enhancement plugins configuration.
+This file configures UI and visual plugins including:
+- Status line (lualine)
+- Rainbow delimiters for bracket matching
+- Noice for improved UI messages
+- Navigation breadcrumbs and file trees
+- Git integration and visualizations
+]]
+
 return {
+	-- Status line with icons and git integration
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
@@ -8,6 +19,7 @@ return {
 			extensions = { "nvim-tree", "lazy" },
 		},
 	},
+	-- Rainbow brackets/delimiters for better code readability
 	{
 		"hiphish/rainbow-delimiters.nvim",
 		event = { "BufReadPost", "BufNewFile" },
@@ -46,6 +58,7 @@ return {
 		end,
 		submodules = false,
 	},
+	-- Modern UI for messages, cmdline, and popupmenu
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -55,6 +68,7 @@ return {
 			"rcarriga/nvim-notify",
 		},
 	},
+	-- Buffer line showing open files as tabs
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = "nvim-tree/nvim-web-devicons",
@@ -66,6 +80,7 @@ return {
 		},
 		event = { "BufReadPre", "BufNewFile" },
 	},
+	-- Auto-color file icons based on current colorscheme
 	{
 		"rachartier/tiny-devicons-auto-colors.nvim",
 		event = "VeryLazy",
@@ -74,6 +89,7 @@ return {
 		},
 		opts = {},
 	},
+	-- Treesitter: Advanced syntax highlighting and code understanding
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },
@@ -84,6 +100,7 @@ return {
 			highlight = { enable = true },
 		},
 	},
+	-- Neorg: Note-taking and organization (optional, controlled by EnableNeorg flag)
 	{
 		"danielosw/neorg",
 
@@ -107,10 +124,13 @@ return {
 		},
 	},
 
+	-- Alpha: Customizable start screen/dashboard
 	{
 		"goolord/alpha-nvim",
 		event = "VimEnter",
 	},
+	
+	-- Navic: Navigation breadcrumbs in status/winbar
 	{
 		"SmiteshP/nvim-navic",
 		opts = {
@@ -126,6 +146,7 @@ return {
 		},
 		lazy = true,
 	},
+	-- Navbuddy: Popup for navigating code symbols
 	{
 		"SmiteshP/nvim-navbuddy",
 		dependencies = {
@@ -134,10 +155,13 @@ return {
 		},
 		lazy = true,
 	},
+	-- Illuminate: Highlight word under cursor throughout file
 	{
 		"RRethy/vim-illuminate",
 		event = { "BufReadPre", "BufNewFile" },
 	},
+	
+	-- Snacks: Collection of useful utilities (lazygit, notifications, etc.)
 	{
 		"folke/snacks.nvim",
 		priority = 1000,

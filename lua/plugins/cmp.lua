@@ -1,3 +1,13 @@
+--[[
+Completion plugin configuration using blink.cmp.
+This file configures:
+- Completion sources (LSP, snippets, buffer, path, etc.)
+- LazyDev integration for Neovim API completions
+- Optional Neorg integration for note-taking
+- Completion behavior and appearance
+]]
+
+-- Define completion source providers
 local provide = function()
 	local provider = {
 		lazydev = {
@@ -7,6 +17,7 @@ local provide = function()
 			score_offset = 100,
 		},
 	}
+	-- Add Neorg completion source if enabled
 	if EnableNeorg then
 		provider.neorg = {
 			name = "neorg",
@@ -15,14 +26,17 @@ local provide = function()
 	end
 	return provider
 end
+
+-- Define default completion sources in priority order
 local default = function()
 	local default2 = {
-		"lazydev",
-		"lsp",
-		"path",
-		"snippets",
-		"buffer",
+		"lazydev",   -- Neovim API completions
+		"lsp",       -- Language server completions
+		"path",      -- File path completions
+		"snippets",  -- Snippet completions
+		"buffer",    -- Buffer text completions
 	}
+	-- Add Neorg to sources if enabled
 	if EnableNeorg then
 		default2[#default2 + 1] = "neorg"
 	end

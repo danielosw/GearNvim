@@ -1,10 +1,23 @@
+--[[
+DAP (Debug Adapter Protocol) setup and configuration.
+This file sets up debug adapters for various languages:
+- Python (debugpy)
+- C/C++/Rust (codelldb)
+- TypeScript/JavaScript (firefox-debug-adapter)
+
+Only sets up adapters that are actually installed to avoid errors.
+]]
+
 local dapui = require("dapui")
 Dap = require("dap")
+
+-- Auto-open DAP UI when debugging session starts
 Dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end
--- Takes in a string and configs a matching dap.
--- The reason I do it this way is so it does not crash if a dap is not installed, because some of configs require it to be installed in mason.
+
+-- Configure a debug adapter by name
+-- Only sets up if the adapter is installed to avoid crashes
 local function setupDap(temp)
 	if temp == "debugpy" then
 		Dap.adapters.python = function(cb, config)
@@ -49,12 +62,15 @@ local function setupDap(temp)
 		}
 	end
 end
+-- List of supported debug adapters
 local daps = { "firefox-debug-adapter", "debugpy", "codelldb" }
+
+-- Check if a debug adapter is installed and set it up
 local function dapexists(dap)
 	if vim.fn.executable(dap) then
 		setupDap(dap)
 	end
 end
 
--- Get a list of all installed daps and setup any found
+-- Iterate through all supported debug adapters and setup any that are installed
 ForEach(daps, dapexists)
