@@ -1,15 +1,28 @@
--- set to true to change lazy config for debugging/optimising
--- has no real use besides this
+--[[
+GearNvim - Main configuration entry point
+A customizable Neovim configuration focused on LSP, debugging, and modern UI features.
+Requires Neovim 0.11+ and external dependencies: cmake, ripgrep, yarn, fzf
+]]
+
+-- Debug flag for Lazy plugin manager profiling
+-- Set to true to enable loader and require profiling for optimization
 local debuglazy = true
--- MUST BE SET BEFORE PLUGIN LOADING
--- if true enables neorg and related things.
--- false because you need to manually install neorg treesitter to get it to work
+
+-- Feature flags (MUST BE SET BEFORE PLUGIN LOADING)
+
+-- Enable Neorg for note-taking and organization
+-- Set to false by default because neorg treesitter parser must be manually installed
 EnableNeorg = false
--- disables codelens due to notificaton spam
+
+-- Enable LSP code lens feature
+-- Set to false by default to avoid notification spam
 Codelens = false
--- Helper that calls some stuff once so we don't do it over and over
+
+-- Load global utility functions and variables
+-- This sets up platform detection, paths, and helper functions
 require("lib.callonce")
--- if theme.lua does not exist, make it to prevent a crash
+-- Create default theme.lua if it doesn't exist to prevent crashes
+-- Uses tokyonight-storm as the default theme
 if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 	local cat = RealPath("/lua/config/theme.lua")
 	local file = vim.uv.fs_open(ConfigPath .. cat, "w+", 438)
@@ -19,12 +32,16 @@ if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 	end
 end
 
+-- Bootstrap Lazy.nvim plugin manager
 local lazypath = DataPath .. "/lazy/lazy.nvim"
+
+-- Platform-specific shell configuration
 if Windows then
-	-- set shell to powershell on windows.
+	-- Use PowerShell on Windows for better compatibility
 	vim.o.shell = "pwsh.exe"
 end
--- install lazy if not installed already
+
+-- Install Lazy.nvim if not already installed
 if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
@@ -35,92 +52,122 @@ if not vim.uv.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+-- Add Lazy.nvim to runtime path
 vim.opt.rtp:prepend(lazypath)
--- add mise shims to path if on linux and shims path exists
+
+-- Add mise shims to PATH on Unix-like systems
+-- mise is a tool version manager (like asdf)
 if Windows ~= true and vim.uv.fs_stat("~/.local/share/mise/shims") then
 	vim.env.PATH = HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH
 end
--- config things that need to be changed before plugins are loaded
+
+-- Pre-plugin configuration
+-- These settings must be set before loading plugins
 local g = vim.g
 local opt = vim.opt
 local o = vim.o
--- set up clipboard
+-- Clipboard configuration
+-- Use system clipboard for better integration
 if Windows ~= true then
-	o.clipboard = "unnamedplus"
+	o.clipboard = "unnamedplus"  -- Unix-like systems
 else
-	o.clipboard = "unnamed"
+	o.clipboard = "unnamed"      -- Windows
 end
--- set leader key to ,
+
+-- Leader key configuration
+-- Set leader to comma for easier access to custom commands
 g.mapleader = ","
 g.maplocalleader = ","
--- disable netrw because we are using NvimTree
+
+-- Disable netrw (built-in file explorer)
+-- We use NvimTree instead for a better file browsing experience
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
--- enable experimental loader
+
+-- Enable experimental Lua module loader for faster startup
 vim.loader.enable()
--- disable this if you use a terminal that does not support it
+
+-- Enable true color support
+-- Disable this if your terminal doesn't support 24-bit colors
 opt.termguicolors = true
--- Disabling default style's because I don't like them
+
+-- Disable default language-specific formatting styles
+-- This allows using custom formatters instead
 g.python_recommended_style = 0
 g.rust_recommended_style = 0
--- Enabling tabs and setting their size
-opt.expandtab = false
-o.tabstop = 4
-o.shiftwidth = 4
-o.number = true
+
+-- Tab and indentation settings
+opt.expandtab = false  -- Use actual tab characters
+o.tabstop = 4          -- Tab width
+o.shiftwidth = 4       -- Indentation width
+o.number = true        -- Show line numbers
+
+-- Track whether theme picker has been loaded (for lazy loading)
 Pickerloaded = false
--- terminal specific config options
+
+-- Load terminal-specific configuration
 require("lib.terms")
 
+-- Lazy.nvim configuration
 local lazydefault = {
 	spec = {
+		-- Import all plugin definitions from lua/plugins/
 		{ import = "plugins" },
 	},
 	performance = {
 		rtp = {
+			-- Disable netrw plugin since we're using NvimTree
 			disabled_plugins = {
 				"netrwPlugin",
 			},
 		},
 	},
 }
+
+-- Enable profiling if debug mode is enabled
 if debuglazy then
 	lazydefault.profiling = {
-		loader = true,
-		require = true,
+		loader = true,   -- Profile plugin loader
+		require = true,  -- Profile require calls
 	}
 end
+
+-- Development path for local plugin development
 lazydefault.dev = {
 	path = "~/projects/neovimplugins",
 }
--- if we are using neovide load neovide specific options
+
+-- Load Neovide-specific configuration if running in Neovide GUI
 if vim.g.neovide then
 	require("config.neovide")
 end
+
+-- Initialize Lazy.nvim with plugins
 require("lazy").setup(lazydefault)
--- treesitter indent guide
+
+-- Setup Treesitter-based indentation
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
--- load colorscheme early on
+
+-- Load colorscheme early for proper UI rendering
 require("config.theme")
--- load the configs
--- config ui
-require("config.ui")
--- Config mason and related
-require("config.mason")
--- setup conform
-require("config.conform")
--- setup dap, MUST HAPPEN AFTER MASON CONFIG
--- setup keybinds
-require("config.keybinds")
--- setup alpha, in its own file due to size
-require("config.alpha")
--- load custom pickers
--- wrapper to lazy load the function so telescope can be lazyloaded
+
+-- Load configuration modules
+require("config.ui")        -- UI enhancements (noice, navic)
+require("config.mason")     -- LSP/DAP setup with Mason
+require("config.conform")   -- Code formatting
+require("config.keybinds")  -- Keybinding setup
+require("config.alpha")     -- Start screen
+
+-- Lazy-load theme picker to avoid loading Telescope at startup
 local function pickwrapper()
+	-- Lazy-load telescope configuration only when theme picker is first used
 	if Pickerloaded == false then
 		require("config.telescope")
 		Pickerloaded = true
 	end
+	-- Open theme picker
 	Themepick()
 end
+
+-- Create :Themes command for interactive theme selection
 vim.api.nvim_create_user_command("Themes", pickwrapper, { desc = "theme picker" })

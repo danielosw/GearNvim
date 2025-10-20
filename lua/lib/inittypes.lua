@@ -1,6 +1,14 @@
+--[[
+This file configures Debug Adapter Protocol (DAP) settings for various programming languages.
+It sets up debugger configurations for C, C++, Rust, Python, and TypeScript.
+This file is loaded to initialize debugging capabilities for supported file types.
+]]
+
+-- Get the current file type
 local ft = vim.o.ft
 
 -- Shared codelldb configuration for C, C++, and Rust
+-- codelldb is a LLDB-based debugger for native languages
 local codelldb_config = {
 	{
 		name = "Launch file",
@@ -14,9 +22,12 @@ local codelldb_config = {
 	},
 }
 
+-- Configure debugger based on file type
 if ft == "cpp" or ft == "c" or ft == "rust" then
+	-- Use codelldb for C, C++, and Rust
 	Dap.configurations[ft] = codelldb_config
 elseif ft == "python" then
+	-- Python debugging configuration using debugpy
 	Dap.configurations.python = {
 		{
 			-- The first three options are required by nvim-dap
@@ -34,6 +45,7 @@ elseif ft == "python" then
 		},
 	}
 elseif ft == "typescript" then
+	-- TypeScript/JavaScript debugging configuration using Firefox debugger
 	Dap.configurations.typescript = {
 		{
 			name = "Debug with Firefox",

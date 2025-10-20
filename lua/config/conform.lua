@@ -1,5 +1,15 @@
+--[[
+Conform configuration for code formatting.
+This file sets up:
+- Formatter mappings for different file types
+- Format-on-save functionality
+- Fallback to LSP formatting when specific formatters aren't available
+]]
+
 local conform = require("conform")
--- Function to make the default setup more convenient
+
+-- Helper function to check if a formatter is available
+-- Returns the formatter if available, otherwise falls back to LSP formatting
 local haveformat = function(bufnr, formatter)
 	if conform.get_formatter_info(formatter, bufnr).available then
 		return { formatter }
@@ -7,7 +17,8 @@ local haveformat = function(bufnr, formatter)
 		return { lsp_format = "fallback" }
 	end
 end
--- we want to enable both ruff_format and ruff_fix if possible
+-- Special handler for Python using Ruff
+-- Enables both ruff_format (formatting) and ruff_fix (linting) if available
 local haveRuff = function(bufnr)
 	local toReturn = {}
 	if conform.get_formatter_info("ruff_format", bufnr).available then
@@ -21,6 +32,7 @@ local haveRuff = function(bufnr)
 	end
 	return toReturn
 end
+-- Setup conform with formatters for each file type
 conform.setup({
 	formatters_by_ft = {
 		lua = function(bufnr)
@@ -57,9 +69,10 @@ conform.setup({
 			return haveformat(bufnr, "biome")
 		end,
 	},
-	["*"] = { "codespell" },
+	["*"] = { "codespell" },  -- Run spell checker on all file types
 })
--- format on write
+
+-- Enable format on save for all file types
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)

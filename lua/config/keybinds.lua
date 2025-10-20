@@ -1,7 +1,19 @@
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+--[[
+Keybinding configuration for LSP, diagnostics, and git integration.
+This file sets up:
+- Global keybindings for diagnostics
+- Git integration shortcuts
+- LSP-specific keybindings when an LSP server attaches to a buffer
+]]
 
-vim.keymap.set("n", "<leader>gg", require("snacks").lazygit.open)
+-- Global diagnostic keybindings
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)  -- Open diagnostic float window
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist) -- Add diagnostics to location list
+
+-- Git integration keybinding
+vim.keymap.set("n", "<leader>gg", require("snacks").lazygit.open)  -- Open lazygit
+
+-- Setup LSP keybindings when an LSP server attaches to a buffer
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
