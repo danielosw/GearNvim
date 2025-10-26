@@ -1,19 +1,21 @@
 local ft = vim.o.ft
 
--- Shared codelldb configuration for C, C++, and Rust
-local codelldb_config = {
-	name = "Launch file",
-	type = "codelldb",
-	request = "launch",
-	program = function()
-		return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
-	end,
-	cwd = "${workspaceFolder}",
-	stopOnEntry = false,
-}
+-- Function to create codelldb configuration for C, C++, and Rust
+local function create_codelldb_config()
+	return {
+		name = "Launch file",
+		type = "codelldb",
+		request = "launch",
+		program = function()
+			return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
+		end,
+		cwd = "${workspaceFolder}",
+		stopOnEntry = false,
+	}
+end
 
 if ft == "cpp" or ft == "c" or ft == "rust" then
-	Dap.configurations[ft] = { codelldb_config }
+	Dap.configurations[ft] = { create_codelldb_config() }
 elseif ft == "python" then
 	Dap.configurations.python = {
 		{
