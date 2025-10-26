@@ -1,6 +1,5 @@
 require("mason").setup()
 require("mason-nvim-dap").setup()
-require("mason-lspconfig").setup()
 local mason_lspconfig = require("mason-lspconfig")
 Mason_registry = require("mason-registry")
 -- setup lsp configs
