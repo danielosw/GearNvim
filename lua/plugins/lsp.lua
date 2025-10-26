@@ -16,7 +16,7 @@ return {
 			},
 		},
 	},
-	{ "williamboman/mason-lspconfig.nvim", opts = { automatic_enable = false }, event = { "BufReadPre", "BufNewFile" } },
+	{ "williamboman/mason-lspconfig.nvim", event = { "BufReadPre", "BufNewFile" } },
 	{
 		"kosayoda/nvim-lightbulb",
 		opts = {
