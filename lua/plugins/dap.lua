@@ -24,8 +24,13 @@ return {
 				desc = "Terminate Debugger",
 			},
 		},
+		-- to make lazy loading work load config on plugin load
+		config = function()
+			require("lib.inittypes")
+		end,
+		lazy = true,
 	},
-	"jay-babu/mason-nvim-dap.nvim",
+	{ "jay-babu/mason-nvim-dap.nvim", lazy = true },
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
@@ -41,10 +46,12 @@ return {
 		-- automatically open/close the DAP UI when starting/stopping the debugger
 		config = function()
 			require("dapui").setup()
+			require("config.dapset")
 			local listener = require("dap").listeners
 			listener.after.event_initialized["dapui_config"] = function()
 				require("dapui").open()
 			end
 		end,
+		lazy = true,
 	},
 }
