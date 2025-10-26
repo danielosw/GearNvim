@@ -1,5 +1,5 @@
 local conform = require("conform")
--- Function to make the default setup more conveniunt
+-- Function to make the default setup more convenient
 local haveformat = function(bufnr, formatter)
 	if conform.get_formatter_info(formatter, bufnr).available then
 		return { formatter }
