@@ -101,9 +101,10 @@ return {
 			},
 		},
 	},
-	{ "rktjmp/shipwright.nvim" },
+	{ "rktjmp/shipwright.nvim", lazy = true },
 	{
 		"rktjmp/lush.nvim",
+		lazy = true,
 		-- if you wish to use your own colorscheme:
 	},
 }
