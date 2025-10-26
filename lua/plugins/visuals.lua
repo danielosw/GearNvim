@@ -1,6 +1,7 @@
 return {
 	{
 		"nvim-lualine/lualine.nvim",
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			theme = "auto",
@@ -9,6 +10,7 @@ return {
 	},
 	{
 		"hiphish/rainbow-delimiters.nvim",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			---@type rainbow_delimiters.config
 			vim.g.rainbow_delimiters = {
@@ -66,6 +68,7 @@ return {
 	},
 	{
 		"rachartier/tiny-devicons-auto-colors.nvim",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 		},
@@ -73,6 +76,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
 		build = ":TSUpdate",
 		branch = "main",
 		opts = {
@@ -105,6 +109,7 @@ return {
 
 	{
 		"goolord/alpha-nvim",
+		event = "VimEnter",
 	},
 	{
 		"SmiteshP/nvim-navic",
@@ -161,6 +166,10 @@ return {
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
+		cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFile", "NvimTreeCollapse" },
+		keys = {
+			{ "<C-n>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree" },
+		},
 		opts = { hijack_unnamed_buffer_when_opening = true, hijack_netrw = true },
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",

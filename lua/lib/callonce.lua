@@ -28,7 +28,7 @@ local function Iswindows()
 end
 function RealPath(path)
 	if Windows then
-		-- convert unix to windons
+		-- convert unix to windows
 		-- this *may* break some weird paths but hopefully that won't happen
 		return path:gsub("/", "\\")
 	end
