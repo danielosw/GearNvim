@@ -1,8 +1,8 @@
 local ft = vim.o.ft
 
--- Function to create codelldb configuration for C, C++, and Rust
-local function create_codelldb_config()
-	return {
+-- Shared codelldb configuration for C, C++, and Rust
+local codelldb_config = {
+	{
 		name = "Launch file",
 		type = "codelldb",
 		request = "launch",
@@ -11,11 +11,11 @@ local function create_codelldb_config()
 		end,
 		cwd = "${workspaceFolder}",
 		stopOnEntry = false,
-	}
-end
+	},
+}
 
 if ft == "cpp" or ft == "c" or ft == "rust" then
-	Dap.configurations[ft] = { create_codelldb_config() }
+	Dap.configurations[ft] = codelldb_config
 elseif ft == "python" then
 	Dap.configurations.python = {
 		{
