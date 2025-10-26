@@ -1,6 +1,6 @@
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
-local debuglazy = false
+local debuglazy = true
 -- MUST BE SET BEFORE PLUGIN LOADING
 -- if true enables neorg and related things.
 -- false because you need to manually install neorg treesitter to get it to work
@@ -68,12 +68,7 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "<filetype>" },
-	callback = function()
-		vim.treesitter.start()
-	end,
-})
+Pickerloaded = false
 -- terminal specific config options
 require("lib.terms")
 
@@ -108,8 +103,6 @@ vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 -- load colorscheme early on
 require("config.theme")
 -- load the configs
--- dap helper to load dap configs on filetypes
-require("lib.inittypes")
 -- config ui
 require("config.ui")
 -- Config mason and related
@@ -117,10 +110,17 @@ require("config.mason")
 -- setup conform
 require("config.conform")
 -- setup dap, MUST HAPPEN AFTER MASON CONFIG
-require("config.dapset")
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size
 require("config.alpha")
 -- load custom pickers
-require("config.telescope")
+-- wrapper to lazy load the function so telescope can be lazyloaded
+local function pickwrapper()
+	if Pickerloaded == false then
+		require("config.telescope")
+		Pickerloaded = true
+	end
+	Themepick()
+end
+vim.api.nvim_create_user_command("Themes", pickwrapper, { desc = "theme picker" })

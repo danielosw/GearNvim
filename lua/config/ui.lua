@@ -16,7 +16,6 @@ require("noice").setup({
 		lsp_doc_border = false, -- add a border to hover docs and signature help
 	},
 })
-require("telescope").load_extension("noice")
 -- setup winbar
 vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 local callback = function()

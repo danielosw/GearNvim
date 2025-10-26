@@ -15,7 +15,7 @@ local provide = function()
 	end
 	return provider
 end
-local defualt = function()
+local default = function()
 	local default2 = {
 		"lazydev",
 		"lsp",
@@ -81,7 +81,7 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = defualt(),
+				default = default(),
 				providers = provide(),
 			},
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
