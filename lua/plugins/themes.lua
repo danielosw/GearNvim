@@ -1,17 +1,19 @@
 return {
 
-	{ "catppuccin/nvim", name = "catppuccin", priority = 200 },
-	{ "folke/tokyonight.nvim", priority = 200 },
-	{ "EdenEast/nightfox.nvim", priority = 200 },
-	{ "nyoom-engineering/oxocarbon.nvim", priority = 200 },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 200, lazy = true },
+	{ "folke/tokyonight.nvim", priority = 200, lazy = true },
+	{ "EdenEast/nightfox.nvim", priority = 200, lazy = true },
+	{ "nyoom-engineering/oxocarbon.nvim", priority = 200, lazy = true },
 	{
 		"Mofiqul/dracula.nvim",
 		priority = 200,
+		lazy = true,
 		opts = Termconf.draculaopts,
 	},
 	{
 		"olimorris/onedarkpro.nvim",
 		priority = 200,
+		lazy = true,
 	},
 	{
 		"uloco/bluloco.nvim",
@@ -101,9 +103,10 @@ return {
 			},
 		},
 	},
-	{ "rktjmp/shipwright.nvim" },
+	{ "rktjmp/shipwright.nvim", lazy = true },
 	{
 		"rktjmp/lush.nvim",
+		lazy = true,
 		-- if you wish to use your own colorscheme:
 	},
 }
