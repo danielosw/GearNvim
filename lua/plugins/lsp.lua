@@ -1,6 +1,5 @@
 return {
 	{ "nvimtools/none-ls.nvim", event = { "BufReadPre", "BufNewFile" } },
-	{ "jay-babu/mason-null-ls.nvim", event = { "BufReadPre", "BufNewFile" } },
 	{ "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
 	{ "williamboman/mason.nvim", lazy = true },
 	{
@@ -15,7 +14,6 @@ return {
 			},
 		},
 	},
-	{ "williamboman/mason-lspconfig.nvim", event = { "BufReadPre", "BufNewFile" } },
 	{
 		"kosayoda/nvim-lightbulb",
 		opts = {

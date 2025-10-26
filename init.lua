@@ -1,6 +1,6 @@
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
-local debuglazy = true
+local debuglazy = false
 -- MUST BE SET BEFORE PLUGIN LOADING
 -- if true enables neorg and related things.
 -- false because you need to manually install neorg treesitter to get it to work
@@ -106,7 +106,7 @@ require("config.theme")
 -- config ui
 require("config.ui")
 -- Config mason and related
-require("config.mason")
+require("config.lsp")
 -- setup conform
 require("config.conform")
 -- setup dap, MUST HAPPEN AFTER MASON CONFIG
