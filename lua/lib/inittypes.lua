@@ -1,43 +1,19 @@
 local ft = vim.o.ft
-if ft == "cpp" then
-	Dap.configurations.cpp = {
-		{
-			name = "Launch file",
-			type = "codelldb",
-			request = "launch",
-			program = function()
-				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
-			end,
-			cwd = "${workspaceFolder}",
-			stopOnEntry = false,
-		},
-	}
-elseif ft == "c" then
-	Dap.configurations.c = {
-		{
-			name = "Launch file",
-			type = "codelldb",
-			request = "launch",
-			program = function()
-				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
-			end,
-			cwd = "${workspaceFolder}",
-			stopOnEntry = false,
-		},
-	}
-elseif ft == "rust" then
-	Dap.configurations.rust = {
-		{
-			name = "Launch file",
-			type = "codelldb",
-			request = "launch",
-			program = function()
-				return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
-			end,
-			cwd = "${workspaceFolder}",
-			stopOnEntry = false,
-		},
-	}
+
+-- Shared codelldb configuration for C, C++, and Rust
+local codelldb_config = {
+	name = "Launch file",
+	type = "codelldb",
+	request = "launch",
+	program = function()
+		return vim.fn.input("Path to executable: ", Cwd .. "/", "file")
+	end,
+	cwd = "${workspaceFolder}",
+	stopOnEntry = false,
+}
+
+if ft == "cpp" or ft == "c" or ft == "rust" then
+	Dap.configurations[ft] = { codelldb_config }
 elseif ft == "python" then
 	Dap.configurations.python = {
 		{
@@ -51,7 +27,7 @@ elseif ft == "python" then
 			program = "${file}", -- This configuration will launch the current file if used.
 			pythonPath = PythonPath,
 			-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-			-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+			-- The code below looks for a `venv` or `.venv` folder in the current directory and uses the python within.
 			-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
 		},
 	}
