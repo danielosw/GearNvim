@@ -33,10 +33,10 @@ conform.setup({
 			return haveRuff(bufnr)
 		end,
 		typescript = function(bufnr)
-			return haveformat(bufnr, "biome")
+			return haveformat(bufnr, "eslint")
 		end,
 		javascript = function(bufnr)
-			return haveformat(bufnr, "biome")
+			return haveformat(bufnr, "eslint")
 		end,
 		html = function(bufnr)
 			return haveformat(bufnr, "biome")
