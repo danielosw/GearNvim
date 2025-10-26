@@ -14,7 +14,7 @@ local schemes = function()
 	return themes
 end
 -- custom theme picker
-local themepick = function(opts)
+Themepick = function(opts)
 	local set = false
 	-- get background to restor
 	local before_background = vim.g.colors_name or "vim"
@@ -51,7 +51,7 @@ local themepick = function(opts)
 			-- preview change
 			previewer = previewers.new_buffer_previewer({
 				define_preview = function(self, entry)
-					if vim.loop.fs_stat(p) then
+					if vim.uv.fs_stat(p) then
 						conf.buffer_previewer_maker(p, self.state.bufnr, { bufname = self.state.bufname })
 					else
 						local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
@@ -76,4 +76,3 @@ local themepick = function(opts)
 end
 
 -- to execute the function
-vim.api.nvim_create_user_command("Themes", themepick, { desc = "theme picker" })
