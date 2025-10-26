@@ -11,7 +11,7 @@ local on_attach = function(client, bufnr)
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true)
 	end
-	if client.supports_method("textDocument/codeLens") and Codelens then
+	if client:supports_method("textDocument/codeLens") and Codelens then
 		vim.lsp.codelens.refresh()
 
 		--- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
