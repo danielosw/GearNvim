@@ -1,4 +1,4 @@
-local mason = require("mason").setup()
+require("mason").setup()
 require("mason-nvim-dap").setup()
 require("mason-lspconfig").setup()
 local mason_lspconfig = require("mason-lspconfig")
@@ -6,7 +6,7 @@ Mason_registry = require("mason-registry")
 -- setup lsp configs
 require("lib.lspconfigs")
 local servers = mason_lspconfig.get_installed_servers()
-for i, name in ipairs(servers) do
+for _, name in ipairs(servers) do
 	vim.lsp.enable(name)
 end
 
