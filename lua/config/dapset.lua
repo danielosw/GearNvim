@@ -31,8 +31,7 @@ local function setupDap(temp)
 				})
 			end
 		end
-	end
-	if temp == "codelldb" then
+	elseif temp == "codelldb" then
 		Dap.adapters.codelldb = {
 			type = "server",
 			port = "${port}",
@@ -41,8 +40,7 @@ local function setupDap(temp)
 				args = { "--port", "${port}" },
 			},
 		}
-	end
-	if temp == "firefox-debug-adapter" then
+	elseif temp == "firefox-debug-adapter" then
 		local catpath = RealPath("/dist/adapter.bundle.js")
 		Dap.adapters.firefox = {
 			type = "executable",
