@@ -6,5 +6,3 @@
 - Finish reorganizing
     -  ( ) Move things in plugins.lua to other files.
 	-  ( ) switch to the native lsp setup
-- Add more stuff
-	-  ( ) [Harpoon](https://github.com/ThePrimeagen/harpoon)
