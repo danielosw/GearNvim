@@ -39,6 +39,7 @@ local enabled_server = {
 	["eslint"] = true,
 	["omnisharp"] = true,
 	["intelephense"] = true,
+	["hls"] = true,
 }
 for i, name in pairs(enabled_server) do
 	vim.lsp.enable(i, name)

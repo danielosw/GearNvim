@@ -94,3 +94,15 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
+vim.lsp.config("hls", {
+	settings = {
+		haskell = {
+			plugin = {
+				importLens = {
+					codeLensOn = false,
+					codeActionsOn = false,
+				},
+			},
+		},
+	},
+})
