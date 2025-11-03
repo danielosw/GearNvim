@@ -1,5 +1,4 @@
 return {
-	{ "nvimtools/none-ls.nvim", event = { "BufReadPre", "BufNewFile" } },
 	{ "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
 	{ "williamboman/mason.nvim", lazy = true },
 	{

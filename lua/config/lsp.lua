@@ -5,16 +5,6 @@ Mason_registry = require("mason-registry")
 require("lib.lspconfigs")
 -- Define navic winbar.
 vim.o.winbar = "%{%v:lua.require('nvim-navic').get_location()%}"
--- nls setup
-local nls = require("null-ls")
-nls.register(nls.builtins.diagnostics.mypy.with({
-	extra_args = function()
-		return {
-			"--python-executable",
-			PythonPath,
-		}
-	end,
-}))
 local enabled_server = {
 	["clangd"] = true,
 	["lua_ls"] = true,
