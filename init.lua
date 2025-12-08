@@ -6,7 +6,7 @@ local debuglazy = false
 -- false because you need to manually install neorg treesitter to get it to work
 EnableNeorg = false
 -- disables codelens due to notificaton spam
-Codelens = false
+Codelens = true
 -- Helper that calls some stuff once so we don't do it over and over
 require("lib.callonce")
 -- if theme.lua does not exist, make it to prevent a crash
