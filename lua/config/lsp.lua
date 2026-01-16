@@ -31,6 +31,7 @@ local enabled_server = {
 	["intelephense"] = true,
 	["hls"] = true,
 	["powershell_es"] = true,
+	["denols"] = true,
 }
 for i, name in pairs(enabled_server) do
 	vim.lsp.enable(i, name)
