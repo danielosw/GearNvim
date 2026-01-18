@@ -30,6 +30,7 @@ local enabled_server = {
 	["omnisharp"] = true,
 	["intelephense"] = true,
 	["hls"] = true,
+	["powershell_es"] = true,
 	["denols"] = true,
 	["basedpyright"] = true,
 }

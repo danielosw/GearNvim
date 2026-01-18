@@ -135,10 +135,6 @@ return {
 		lazy = true,
 	},
 	{
-		"RRethy/vim-illuminate",
-		event = { "BufReadPre", "BufNewFile" },
-	},
-	{
 		"folke/snacks.nvim",
 		priority = 1000,
 		lazy = false,
