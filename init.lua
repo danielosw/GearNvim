@@ -1,6 +1,6 @@
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
-local debuglazy = false
+local debuglazy = true
 -- MUST BE SET BEFORE PLUGIN LOADING
 -- if true enables neorg and related things.
 -- false because you need to manually install neorg treesitter to get it to work

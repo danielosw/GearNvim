@@ -57,7 +57,6 @@ conform.setup({
 			return haveformat(bufnr, "biome")
 		end,
 	},
-	["*"] = { "codespell" },
 })
 -- format on write
 vim.api.nvim_create_autocmd("BufWritePre", {
