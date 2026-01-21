@@ -15,7 +15,7 @@ local enabled_server = {
 	["html"] = true,
 	["jsonls"] = true,
 	["rust_analyzer"] = true,
-	["pylsp"] = true,
+	["pylsp"] = false,
 	["astro"] = true,
 	["bashls"] = true,
 	["cmake"] = true,
@@ -30,6 +30,9 @@ local enabled_server = {
 	["omnisharp"] = true,
 	["intelephense"] = true,
 	["hls"] = true,
+	["powershell_es"] = true,
+	["denols"] = true,
+	["basedpyright"] = true,
 }
 for i, name in pairs(enabled_server) do
 	vim.lsp.enable(i, name)
