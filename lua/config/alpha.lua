@@ -74,10 +74,13 @@ local terminal = {
 		window_config = {},
 	},
 }
-
+-- for some reason without this it always picks the same result
+math.randomseed(os.time())
+local quotepick = math.random(#Quotes)
+local headerpick = math.random(#headers)
 local header = {
 	type = "text",
-	val = headers[math.random(#headers)],
+	val = headers[headerpick],
 	opts = {
 		position = "center",
 		hl = "Type",
@@ -88,7 +91,7 @@ local header = {
 local footer = {
 	type = "group",
 	val = {
-		footer_text(Quotes[math.random(#Quotes)]),
+		footer_text(Quotes[quotepick]),
 		footer_text("Started in " .. lazy.cputime() .. " MS!"),
 	},
 	opts = { spacing = 1 },
