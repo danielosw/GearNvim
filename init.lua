@@ -1,3 +1,4 @@
+vim.loader.enable()
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
 local debuglazy = true
@@ -24,6 +25,7 @@ if Windows then
 	-- set shell to powershell on windows.
 	vim.o.shell = "pwsh.exe"
 end
+
 -- install lazy if not installed already
 if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
@@ -56,8 +58,6 @@ g.maplocalleader = ","
 -- disable netrw because we are using NvimTree
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
--- enable experimental loader
-vim.loader.enable()
 -- disable this if you use a terminal that does not support it
 opt.termguicolors = true
 -- Disabling default style's because I don't like them
