@@ -16,7 +16,7 @@ if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 	local file = vim.uv.fs_open(ConfigPath .. cat, "w+", 438)
 	if file ~= nil then
 		-- not my fav theme but its common
-		vim.uv.fs_write(file, 'vim.cmd("colorscheme tokyonight-storm")')
+		vim.uv.fs_write(file, 'vim.cmd.colorscheme("tokyonight-storm")')
 	end
 end
 
