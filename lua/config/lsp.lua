@@ -1,6 +1,5 @@
 require("mason").setup()
 require("mason-nvim-dap").setup()
-Mason_registry = require("mason-registry")
 -- setup lsp configs
 require("lib.lspconfigs")
 -- Define navic winbar.
@@ -34,6 +33,12 @@ local enabled_server = {
 	["denols"] = true,
 	["basedpyright"] = true,
 }
-for i, name in pairs(enabled_server) do
-	vim.lsp.enable(i, name)
-end
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyVimStarted",
+	once = true,
+	callback = function()
+		for i, name in pairs(enabled_server) do
+			vim.lsp.enable(i, name)
+		end
+	end,
+})
