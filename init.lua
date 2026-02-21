@@ -1,4 +1,3 @@
-vim.loader.enable()
 -- set to true to change lazy config for debugging/optimising
 -- has no real use besides this
 local debuglazy = true
@@ -105,11 +104,10 @@ require("config.theme")
 -- load the configs
 -- config ui
 require("config.ui")
--- Config mason and related
+-- Config lsp
 require("config.lsp")
 -- setup conform
 require("config.conform")
--- setup dap, MUST HAPPEN AFTER MASON CONFIG
 -- setup keybinds
 require("config.keybinds")
 -- setup alpha, in its own file due to size
