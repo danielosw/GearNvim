@@ -9,44 +9,6 @@ return {
 		},
 	},
 	{
-		"hiphish/rainbow-delimiters.nvim",
-		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			---@type rainbow_delimiters.config
-			vim.g.rainbow_delimiters = {
-				strategy = {
-					[""] = "rainbow-delimiters.strategy.global",
-				},
-				query = {
-					[""] = "rainbow-delimiters",
-					lua = "rainbow-blocks",
-				},
-				priority = {
-					[""] = 110,
-					lua = 210,
-				},
-				highlight = {
-					--- TsRainbow has better support
-					"TsRainbowRed",
-					"TsRainbowYellow",
-					"TsRainbowBlue",
-					"TsRainbowOrange",
-					"TsRainbowGreen",
-					"TsRainbowViolet",
-					"TsRainbowCyan",
-					"RainbowDelimiterRed",
-					"RainbowDelimiterYellow",
-					"RainbowDelimiterBlue",
-					"RainbowDelimiterOrange",
-					"RainbowDelimiterGreen",
-					"RainbowDelimiterViolet",
-					"RainbowDelimiterCyan",
-				},
-			}
-		end,
-		submodules = false,
-	},
-	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {},
