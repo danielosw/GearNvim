@@ -21,8 +21,11 @@ end
 
 local lazypath = DataPath .. "/lazy/lazy.nvim"
 if Windows then
-	-- set shell to powershell on windows.
+	-- set shell to powershell on windows with proper flags
 	vim.o.shell = "pwsh.exe"
+	vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+	vim.o.shellquote = ""
+	vim.o.shellxquote = ""
 end
 
 -- install lazy if not installed already
