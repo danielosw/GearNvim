@@ -32,14 +32,14 @@ Themepick = function(opts)
 					actions.close(prompt_bufnr)
 					local selection = action_state.get_selected_entry()
 					-- set colorscheme now
-					vim.cmd("colorscheme " .. selection[1])
+					vim.cmd.colorscheme(selection[1])
 					-- write scheme to file
 					local file = "dummy.lua"
 					local folder = ConfigPath
 					file = folder .. RealPath("/lua/config/theme.lua")
 					local filehandle = io.open(file, "w+")
 					if filehandle ~= nil then
-						filehandle.write(filehandle, 'vim.cmd("colorscheme ' .. selection[1] .. '")')
+						filehandle.write(filehandle, 'vim.cmd.colorscheme("' .. selection[1] .. '")')
 					end
 					-- close file
 					if filehandle ~= nil then
@@ -58,7 +58,7 @@ Themepick = function(opts)
 						vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
 					end
 					-- this is why we need to restor
-					vim.cmd("colorscheme " .. entry[1])
+					vim.cmd.colorscheme(entry[1])
 				end,
 
 				get_buffer_by_name = function()
@@ -67,7 +67,7 @@ Themepick = function(opts)
 				teardown = function(self)
 					-- restore if we did not set a scheme
 					if not set then
-						vim.cmd("colorscheme " .. before_background)
+						vim.cmd.colorscheme(before_background)
 					end
 				end,
 			}),

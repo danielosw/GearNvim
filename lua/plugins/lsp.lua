@@ -13,16 +13,7 @@ return {
 			},
 		},
 	},
-	{
-		"kosayoda/nvim-lightbulb",
-		opts = {
-			autocmd = { enabled = true },
-			ignore = {
-				clients = { "ruff" },
-			},
-		},
-		event = { "LspAttach" },
-	},
+
 	{
 		"aznhe21/actions-preview.nvim",
 		config = function()
@@ -32,7 +23,6 @@ return {
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy", -- Or `LspAttach`
 		priority = 1000, -- needs to be loaded in first
 		config = function()
 			require("tiny-inline-diagnostic").setup({
@@ -47,5 +37,6 @@ return {
 			})
 			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
 		end,
+		event = { "LspAttach" },
 	},
 }

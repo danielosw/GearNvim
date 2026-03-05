@@ -21,32 +21,6 @@ return {
 		},
 	},
 	{
-		"chrisgrieser/nvim-scissors",
-		dependencies = "nvim-telescope/telescope.nvim",
-		keys = {
-			{
-				"<leader>se",
-				function()
-					require("scissors").editSnippet()
-				end,
-				mode = { "n" },
-				desc = "Snippet: Edit",
-			},
-			{
-				"<leader>sa",
-				function()
-					require("scissors").addNewSnippet()
-				end,
-				mode = { "n", "x" },
-				desc = "Snippet: Add",
-			},
-		},
-		opts = {
-
-			snippetDir = ConfigPath .. "/snippets",
-		},
-	},
-	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },

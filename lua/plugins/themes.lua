@@ -93,7 +93,6 @@ return {
 				alpha = true,
 				blinkcmp = true,
 				snacks = true,
-				rainbow_delimiters = true,
 				treesitter = true,
 				lazy = true,
 				noice = true,
