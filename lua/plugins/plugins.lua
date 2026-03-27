@@ -1,5 +1,5 @@
 return {
-	{ "windwp/nvim-autopairs", event = "InsertEnter", config = true },
+	{ 'nvim-mini/mini.pairs', version = '*', opts = true, },
 	{
 		"saecki/crates.nvim",
 		event = { "BufRead Cargo.toml" },
