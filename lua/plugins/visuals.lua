@@ -1,3 +1,4 @@
+local enableNeorg = require("lib/settings").neorg
 return {
 	{
 		"nvim-lualine/lualine.nvim",
@@ -50,7 +51,7 @@ return {
 		"danielosw/neorg",
 
 		lazy = false,
-		cond = EnableNeorg,
+		cond = enableNeorg,
 		opts = {
 			load = {
 				["core.defaults"] = {},

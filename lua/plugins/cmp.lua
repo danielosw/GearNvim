@@ -1,3 +1,4 @@
+local enableNeorg = require("lib/settings").neorg
 local provide = function()
 	local provider = {
 		lazydev = {
@@ -7,7 +8,7 @@ local provide = function()
 			score_offset = 100,
 		},
 	}
-	if EnableNeorg then
+	if enableNeorg then
 		provider.neorg = {
 			name = "neorg",
 			module = "blink.compat.source",
@@ -23,7 +24,7 @@ local default = function()
 		"snippets",
 		"buffer",
 	}
-	if EnableNeorg then
+	if enableNeorg then
 		default2[#default2 + 1] = "neorg"
 	end
 	return default2

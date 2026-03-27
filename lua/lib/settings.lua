@@ -7,13 +7,17 @@
 ---@class ConfigTable
 ---@field quotes QuotesConfig
 ---@field neorg boolean
-
-M = {
+---@field debugLazy boolean
+---@field codeLens boolean
+---@type ConfigTable
+local M = {
 	quotes = {
 		inspire = true,
 		comedy = true,
 		other = true,
 	},
 	neorg = false,
+	debugLazy = false,
+	codeLens = true,
 }
 return M
