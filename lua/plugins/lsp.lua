@@ -1,13 +1,11 @@
 return {
 	{ "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
-	{ "williamboman/mason.nvim", lazy = true },
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",
 		opts = {
 			library = {
 				"lazy.nvim",
-				"mason.nvim",
 				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
 				"lush.nvim",
 			},
