@@ -1,15 +1,28 @@
 return {
+	{ "nvim-tree/nvim-web-devicons" },
+
+	{
+		"rachartier/tiny-devicons-auto-colors.nvim",
+		name = "tiny-devicons-auto-colors",
+		deps = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
 	{
 		"nvim-lualine/lualine.nvim",
 		name = "lualine",
+		deps = { "nvim-tree/nvim-web-devicons" },
+
 		opts = {
 			theme = "auto",
-			extensions = { "nvim-tree", "lazy" },
+			extensions = { "nvim-tree" },
 		},
 	},
+
 	{
-		name = "noice",
 		"folke/noice.nvim",
+
+		name = "noice",
+		deps = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
 		opts = {},
 	},
 	{ "MunifTanjim/nui.nvim" },
@@ -23,12 +36,7 @@ return {
 				themable = true,
 			},
 		},
-	},
-	{ "nvim-tree/nvim-web-devicons" },
-	{
-		"rachartier/tiny-devicons-auto-colors.nvim",
-		name = "tiny-devicons-auto-colors",
-		opts = {},
+		deps = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	{
@@ -51,9 +59,12 @@ return {
 	},
 	{
 		"SmiteshP/nvim-navbuddy",
+		deps = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
 	},
 	{
 		"folke/snacks.nvim",
+		priority = 1000,
+
 		name = "snacks",
 		---@type snacks.Config
 		opts = {
@@ -81,5 +92,6 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		name = "nvim-tree",
 		opts = { hijack_unnamed_buffer_when_opening = true, hijack_netrw = true },
+		deps = { "nvim-tree/nvim-web-devicons" },
 	},
 }

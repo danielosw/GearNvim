@@ -139,10 +139,4 @@ local startup_screen = {
 	-- deprecated
 	opts = config,
 }
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "alpha",
-	callback = function()
-		vim.opt_local.foldenable = false
-	end,
-})
 alpha.setup(startup_screen.config)
