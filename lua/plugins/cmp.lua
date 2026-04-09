@@ -9,7 +9,7 @@ return {
 		-- build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
-
+		deps = { "rafamadriz/friendly-snippets", "Saghen/blink.compat" },
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
