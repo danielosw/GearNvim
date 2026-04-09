@@ -36,6 +36,8 @@ return {
 				themable = true,
 			},
 		},
+		event = { "BufReadPre", "BufNewFile" },
+
 		deps = { "nvim-tree/nvim-web-devicons" },
 	},
 

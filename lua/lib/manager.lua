@@ -27,23 +27,42 @@ local function tablesort(plugspecs)
 	end)
 	return ps
 end
+local function callback(value)
+	local versioning = value.version ~= nil
+	local opting = value.opts ~= nil
+	local configing = value.config ~= nil
+	local name = value.name
+
+	if versioning then
+		vim.pack.add({ { src = gh(value[1]), versioning = vim.version.range(value.version), name = name } })
+	else
+		vim.pack.add({ { src = gh(value[1]), name = name } })
+	end
+
+	if opting then
+		require(value.name).setup(value.opts)
+	end
+	if configing then
+		value.config()
+	end
+end
 local function setup(pluginspecs)
 	for _, value in ipairs(pluginspecs) do
-		local versioning = value.version ~= nil
-		local opting = value.opts ~= nil
-		local configing = value.config ~= nil
-		local name = value.name
-		if versioning then
-			vim.pack.add({ { src = gh(value[1]), versioning = vim.version.range(value.version), name = name } })
-		else
-			vim.pack.add({ { src = gh(value[1]), name = name } })
-		end
+		local event = value.event
 
-		if opting then
-			require(value.name).setup(value.opts)
-		end
-		if configing then
-			value.config()
+		if event == nil then
+			callback(value)
+		else
+			for _, i in ipairs(event) do
+				-- pass the value to the callback function using a closure
+
+				vim.api.nvim_create_autocmd(i, {
+					callback = function()
+						callback(value)
+					end,
+					once = true,
+				})
+			end
 		end
 	end
 end
