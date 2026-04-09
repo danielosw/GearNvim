@@ -1,29 +1,22 @@
 require("lib.callonce")
 -- load autocmds
 require("lib.autocmds")
+-- if theme.lua does not exist, make it to prevent a crash
+if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
+	local cat = RealPath("/lua/config/theme.lua")
+	local file = vim.uv.fs_open(ConfigPath .. cat, "w+", 438)
+	if file ~= nil then
+		-- not my fav theme but its common
+		vim.uv.fs_write(file, 'vim.cmd.colorscheme("tokyonight-storm")')
+	end
+end
 -- load plugin manager
 local manager = require("lib.manager")
 --- Set globals
 Globals = {
 	Windows = package.config:sub(1, 1) == "\\",
 }
----@class QuotesConfig
----@field inspire boolean
----@field comedy boolean
----@field other boolean
-
----@class ConfigTable
----@field quotes QuotesConfig
----@field codeLens boolean
----@type ConfigTable
-Settings = {
-	quotes = {
-		inspire = true,
-		comedy = true,
-		other = true,
-	},
-	codeLens = true,
-}
+local settings = require("lib.settings")
 -- create convinance locals
 local windows = Globals.Windows
 local g = vim.g
@@ -33,6 +26,11 @@ if windows ~= true then
 	o.clipboard = "unnamedplus"
 else
 	o.clipboard = "unnamed"
+	-- set shell to powershell on windows with proper flags
+	vim.o.shell = "pwsh.exe"
+	vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+	vim.o.shellquote = ""
+	vim.o.shellxquote = ""
 end
 -- set leader key to ,
 g.mapleader = ","
@@ -50,6 +48,10 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
+if vim.g.neovide then
+	require("config.neovide")
+end
+
 -- load plugins
 manager.pluginsetup({ "cmp", "lsp", "plugins", "themes", "visuals", "telescope" })
 
