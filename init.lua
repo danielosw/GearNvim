@@ -51,7 +51,7 @@ o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
 -- load plugins
-local pluginlist = manager.pluginsetup({ "cmp", "lsp", "plugins", "themes", "visuals", "telescope" })
+manager.pluginsetup({ "cmp", "lsp", "plugins", "themes", "visuals", "telescope" })
 
 --- load configs
 require("config.theme")
