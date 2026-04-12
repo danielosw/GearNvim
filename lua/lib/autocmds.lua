@@ -16,6 +16,10 @@ local hooks = function(ev)
 		end
 	end
 end
+local callback = function()
+	require("snacks").lazygit.open()
+end
+vim.api.nvim_create_user_command("Lazygit", callback, { desc = "opens lazygit" })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "alpha",
 	callback = function()

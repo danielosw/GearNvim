@@ -16,7 +16,6 @@ local manager = require("lib.manager")
 Globals = {
 	Windows = package.config:sub(1, 1) == "\\",
 }
-local settings = require("lib.settings")
 -- create convinance locals
 local windows = Globals.Windows
 local g = vim.g
