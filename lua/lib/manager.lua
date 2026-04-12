@@ -1,7 +1,15 @@
+--- Compatability layer for lazy
+--- Does not work on everything but its something
+---@class pluginManager
+---@field pluginsetup function
 M = {}
+---@param x string
+---@return string
 local gh = function(x)
 	return "https://github.com/" .. x
 end
+---@param plugspecs table
+---@return table
 local function tablesort(plugspecs)
 	local ps = plugspecs
 	table.sort(ps, function(p1, p2)
@@ -28,24 +36,21 @@ local function tablesort(plugspecs)
 	return ps
 end
 local function callback(value)
-	local versioning = value.version ~= nil
-	local opting = value.opts ~= nil
-	local configing = value.config ~= nil
 	local name = value.name
-
-	if versioning then
+	if value.version ~= nil then
 		vim.pack.add({ { src = gh(value[1]), versioning = vim.version.range(value.version), name = name } })
 	else
 		vim.pack.add({ { src = gh(value[1]), name = name } })
 	end
 
-	if opting then
+	if value.opts ~= nil then
 		require(value.name).setup(value.opts)
 	end
-	if configing then
+	if value.config ~= nil then
 		value.config()
 	end
 end
+---@param pluginspecs table
 local function setup(pluginspecs)
 	for _, value in ipairs(pluginspecs) do
 		local event = value.event
@@ -66,6 +71,9 @@ local function setup(pluginspecs)
 		end
 	end
 end
+---@param plugin_file_list table
+---@return nil
+---takes a list of plugins and sets them up
 M.pluginsetup = function(plugin_file_list)
 	local tomerge = Map(plugin_file_list, function(plug_name)
 		return require("plugins/" .. plug_name)

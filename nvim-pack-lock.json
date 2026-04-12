@@ -5,7 +5,7 @@
       "src": "https://github.com/aznhe21/actions-preview.nvim"
     },
     "alpha-nvim": {
-      "rev": "f6682d95210a598f277dd21a437f0e66440e3f17",
+      "rev": "f06e542277edd8f0e57c81b704558be00226f2ff",
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
@@ -45,7 +45,7 @@
       "src": "https://github.com/onsails/lspkind.nvim"
     },
     "lualine": {
-      "rev": "f5d2a8570f8b736ddb9bb4be504355bcd6e15ec8",
+      "rev": "a905eeebc4e63fdc48b5135d3bf8aea5618fb21c",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.pairs": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "cb5bc0b2b35a6d513e3298d285db81453e791f4f",
+      "rev": "8a9378a822719346a0288fa004dab302ca3c0a8f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navbuddy": {
