@@ -1,4 +1,3 @@
-local codeLensEnabled = require("lib/settings").codeLens
 local navic = require("nvim-navic")
 local navbud = require("nvim-navbuddy")
 -- lsp on attach
