@@ -1,5 +1,8 @@
 local conform = require("conform")
--- Function to make the default setup more convenient
+--- Function to make the default setup more convenient
+---@param bufnr integer
+---@param formatter string
+---@return table
 local haveformat = function(bufnr, formatter)
 	if conform.get_formatter_info(formatter, bufnr).available then
 		return { formatter }
