@@ -1,11 +1,11 @@
 {
   "plugins": {
     "actions-preview.nvim": {
-      "rev": "cb938c25edaac38d362555f19244a9cb85d561e8",
+      "rev": "2b604b2e8e662c03b716436f6ffebcb19663e66a",
       "src": "https://github.com/aznhe21/actions-preview.nvim"
     },
     "alpha-nvim": {
-      "rev": "a9d8fb72213c8b461e791409e7feabb74eb6ce73",
+      "rev": "f6682d95210a598f277dd21a437f0e66440e3f17",
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "c588db330592fa477a70d2fee6ba20a57194bdc3",
+      "rev": "cb5bc0b2b35a6d513e3298d285db81453e791f4f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navbuddy": {
@@ -77,7 +77,7 @@
       "src": "https://github.com/rcarriga/nvim-notify"
     },
     "nvim-rip-substitute": {
-      "rev": "3ff85033206aa9fbf9b988b2cc71e25ae4566424",
+      "rev": "76865f7abba5f285e3f9d3cd4c0ad97250eb04de",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-tree": {
@@ -85,11 +85,11 @@
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-web-devicons": {
-      "rev": "6e76c5e47e957fbf080b1fdac165c66dbd2e7cfb",
+      "rev": "c72328a5494b4502947a022fe69c0c47e53b6aa6",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
-      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "snacks": {
@@ -101,7 +101,7 @@
       "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
     },
     "telescope.nvim": {
-      "rev": "48d2656e54d3e3953ae647153ccdaffa50d4d76b",
+      "rev": "f7c673b8e46e8f233ff581d3624a517d33a7e264",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tiny-devicons-auto-colors": {
