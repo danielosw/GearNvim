@@ -5,7 +5,7 @@
       "src": "https://github.com/aznhe21/actions-preview.nvim"
     },
     "alpha-nvim": {
-      "rev": "fdb675257c7317fd068fe3224465781ad335751d",
+      "rev": "47ff4668e2eb3a8ee60d29614fd3dc9f7c6a433e",
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {

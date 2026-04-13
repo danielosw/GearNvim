@@ -54,8 +54,8 @@ end
 local function setup(pluginspecs)
 	for _, value in ipairs(pluginspecs) do
 		local event = value.event
-
-		if event == nil then
+		-- verylazy just means load at start
+		if event == nil or event == "VeryLazy" then
 			callback(value)
 		else
 			for _, i in ipairs(event) do

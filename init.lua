@@ -1,5 +1,6 @@
 require("lib.callonce")
 -- load autocmds
+
 require("lib.autocmds")
 -- if theme.lua does not exist, make it to prevent a crash
 if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
