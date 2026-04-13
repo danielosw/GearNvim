@@ -5,7 +5,7 @@
       "src": "https://github.com/aznhe21/actions-preview.nvim"
     },
     "alpha-nvim": {
-      "rev": "f06e542277edd8f0e57c81b704558be00226f2ff",
+      "rev": "fdb675257c7317fd068fe3224465781ad335751d",
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
@@ -77,7 +77,7 @@
       "src": "https://github.com/rcarriga/nvim-notify"
     },
     "nvim-rip-substitute": {
-      "rev": "76865f7abba5f285e3f9d3cd4c0ad97250eb04de",
+      "rev": "9fe08300808a67773325d97ecb36d5777cc8e80d",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-tree": {
@@ -101,7 +101,7 @@
       "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
     },
     "telescope.nvim": {
-      "rev": "f7c673b8e46e8f233ff581d3624a517d33a7e264",
+      "rev": "3ab376cfae65b921dda454df5967f8df673effc6",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
     "tiny-devicons-auto-colors": {
