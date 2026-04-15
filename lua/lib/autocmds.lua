@@ -3,7 +3,10 @@
 local hooks = function(ev)
 	local name, kind = ev.data.spec.name, ev.data.kind
 	if name == "telescope-fzf-native.nvim" and (kind == "install" or kind == "update") then
+		local shell = Windows and "pwsh.exe" or "sh"
 		vim.system({
+			shell,
+			"-c",
 			"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 		}, { cwd = ev.data.path }):wait()
 	elseif name == "blink.cmp" and (kind == "install" or kind == "update") then
