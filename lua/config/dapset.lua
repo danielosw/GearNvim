@@ -4,7 +4,6 @@ Dap.listeners.after.event_initialized["dapui_config"] = function()
 	dapui.open()
 end
 -- Takes in a string and configs a matching dap.
--- The reason I do it this way is so it does not crash if a dap is not installed, because some of configs require it to be installed in mason.
 local function setupDap(temp)
 	if temp == "debugpy" then
 		Dap.adapters.python = function(cb, config)

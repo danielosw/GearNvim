@@ -1,5 +1,3 @@
-require("mason").setup()
-require("mason-nvim-dap").setup()
 -- setup lsp configs
 require("lib.lspconfigs")
 -- Define navic winbar.
@@ -15,19 +13,19 @@ local enabled_server = {
 	["jsonls"] = true,
 	["rust_analyzer"] = true,
 	["pylsp"] = false,
-	["astro"] = true,
+	["astro"] = false,
 	["bashls"] = true,
-	["cmake"] = true,
-	["docker_compose_language_service"] = true,
-	["fish_lsp"] = true,
-	["jdtls"] = true,
-	["lemminx"] = true,
+	["cmake"] = false,
+	["docker_compose_language_service"] = false,
+	["fish_lsp"] = false,
+	["jdtls"] = false,
+	["lemminx"] = false,
 	["ruby_lsp"] = true,
 	["taplo"] = true,
 	["zls"] = true,
 	["eslint"] = true,
-	["omnisharp"] = true,
-	["intelephense"] = true,
+	["omnisharp"] = false,
+	["intelephense"] = false,
 	["hls"] = true,
 	["powershell_es"] = true,
 	["denols"] = true,

@@ -1,12 +1,5 @@
--- set to true to change lazy config for debugging/optimising
--- has no real use besides this
-local debuglazy = true
--- MUST BE SET BEFORE PLUGIN LOADING
--- if true enables neorg and related things.
--- false because you need to manually install neorg treesitter to get it to work
-EnableNeorg = false
--- disables codelens due to notificaton spam
-Codelens = true
+-- load setting
+local settings = require("lib/settings")
 -- Helper that calls some stuff once so we don't do it over and over
 require("lib.callonce")
 -- if theme.lua does not exist, make it to prevent a crash
@@ -21,8 +14,11 @@ end
 
 local lazypath = DataPath .. "/lazy/lazy.nvim"
 if Windows then
-	-- set shell to powershell on windows.
+	-- set shell to powershell on windows with proper flags
 	vim.o.shell = "pwsh.exe"
+	vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
+	vim.o.shellquote = ""
+	vim.o.shellxquote = ""
 end
 
 -- install lazy if not installed already
@@ -83,7 +79,7 @@ local lazydefault = {
 		},
 	},
 }
-if debuglazy then
+if settings.debugLazy then
 	lazydefault.profiling = {
 		loader = true,
 		require = true,

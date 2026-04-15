@@ -30,7 +30,6 @@ return {
 		end,
 		lazy = true,
 	},
-	{ "jay-babu/mason-nvim-dap.nvim", lazy = true },
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },

@@ -14,7 +14,7 @@ local function getPython()
 		return vim.fn.exepath("python")
 	end
 end
-
+--- @return boolean
 local function Iswindows()
 	if package.config:sub(1, 1) == "\\" then
 		return true
@@ -22,6 +22,8 @@ local function Iswindows()
 		return false
 	end
 end
+--- @param path string
+--- @return string
 function RealPath(path)
 	if Windows then
 		-- convert unix to windows
@@ -30,6 +32,10 @@ function RealPath(path)
 	end
 	return path
 end
+
+--- @param iter table
+--- @param func function
+--- @return table
 function Map(iter, func)
 	do
 		local toReturn = {}
@@ -39,6 +45,10 @@ function Map(iter, func)
 		return toReturn
 	end
 end
+
+--- @param iter table
+--- @param func function
+--- @return nil
 function ForEach(iter, func)
 	do
 		for _, value in ipairs(iter) do
