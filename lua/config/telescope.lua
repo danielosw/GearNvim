@@ -4,6 +4,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local previewers = require("telescope.previewers")
+local ConfigPath = Globals.ConfigPath
 -- get colorschemes
 local schemes = function()
 	-- get a list of all color schemes

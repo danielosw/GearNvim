@@ -2,19 +2,27 @@
 --- Does not work on everything but its something
 ---@class pluginManager
 ---@field pluginsetup function
-M = {}
+local M = {}
 ---@param x string
 ---@return string
 local gh = function(x)
 	return "https://github.com/" .. x
 end
+---@param pluginstable table
+local function setDefaults(pluginstable)
+	local plugspecs = pluginstable
+	for _, p in ipairs(plugspecs) do
+		p.priority = (p.priority ~= nil) and p.priority or 50
+		p.name = p.name or p[1]
+	end
+	return plugspecs
+end
+
 ---@param plugspecs table
 ---@return table
 local function tablesort(plugspecs)
 	local ps = plugspecs
 	table.sort(ps, function(p1, p2)
-		local pri1 = 50
-		local pri2 = 50
 		if p1.deps ~= nil then
 			if table.contains(p1.deps, p2[1]) then
 				return false
@@ -25,13 +33,7 @@ local function tablesort(plugspecs)
 				return true
 			end
 		end
-		if p1.priority ~= nil then
-			pri1 = p1.priority
-		end
-		if p2.priority ~= nil then
-			pri2 = p2.priority
-		end
-		return pri1 > pri2
+		return p1.priority > p2.priority
 	end)
 	return ps
 end
@@ -87,7 +89,8 @@ M.pluginsetup = function(plugin_file_list)
 		end
 		return merger
 	end
-	local merged = merge(tomerge)
+	local merged = setDefaults(merge(tomerge))
+
 	local ptable = tablesort(merged)
 	setup(ptable)
 end

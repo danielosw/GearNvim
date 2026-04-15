@@ -1,6 +1,7 @@
 require("lib.callonce")
+local windows = Globals.Windows
+local ConfigPath = Globals.ConfigPath
 -- load autocmds
-
 require("lib.autocmds")
 -- if theme.lua does not exist, make it to prevent a crash
 if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
@@ -9,16 +10,11 @@ if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 	if file ~= nil then
 		-- not my fav theme but its common
 		vim.uv.fs_write(file, 'vim.cmd.colorscheme("tokyonight-storm")')
+		vim.uv.fs_close(file)
 	end
 end
 -- load plugin manager
 local manager = require("lib.manager")
---- Set globals
-Globals = {
-	Windows = package.config:sub(1, 1) == "\\",
-}
--- create convinance locals
-local windows = Globals.Windows
 local g = vim.g
 local opt = vim.opt
 local o = vim.o
