@@ -1,3 +1,4 @@
+local codeLensEnabled = require("lib/settings").codeLens
 local navic = require("nvim-navic")
 local navbud = require("nvim-navbuddy")
 -- lsp on attach
@@ -10,6 +11,18 @@ local on_attach = function(client, bufnr)
 	-- enable inlay hints if possible
 	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true)
+	end
+	if client:supports_method("textDocument/codeLens") and codeLensEnabled then
+		vim.lsp.codelens.refresh()
+
+		--- autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+
+		vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
+
+			buffer = bufnr,
+
+			callback = vim.lsp.codelens.refresh,
+		})
 	end
 end
 -- run on attach for all lsps

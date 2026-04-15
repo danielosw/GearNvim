@@ -1,8 +1,8 @@
 return {
-	{ "neovim/nvim-lspconfig" },
+	{ "neovim/nvim-lspconfig", event = { "BufReadPre", "BufNewFile" } },
 	{
 		"folke/lazydev.nvim",
-		name = "lazydev",
+		ft = "lua",
 		opts = {
 			library = {
 				"lazy.nvim",
@@ -17,10 +17,11 @@ return {
 		config = function()
 			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
 		end,
+		event = { "LspAttach" },
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		priority = 1000,
+		priority = 1000, -- needs to be loaded in first
 		config = function()
 			require("tiny-inline-diagnostic").setup({
 				options = {
@@ -34,5 +35,6 @@ return {
 			})
 			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
 		end,
+		event = { "LspAttach" },
 	},
 }

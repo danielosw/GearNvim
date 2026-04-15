@@ -1,52 +1,26 @@
+local enableNeorg = require("lib/settings").neorg
 return {
-	{ "nvim-tree/nvim-web-devicons" },
-
-	{
-		"rachartier/tiny-devicons-auto-colors.nvim",
-		name = "tiny-devicons-auto-colors",
-		deps = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
-	},
 	{
 		"nvim-lualine/lualine.nvim",
-		name = "lualine",
-		deps = { "nvim-tree/nvim-web-devicons" },
-
+		event = "VeryLazy",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			theme = "auto",
-			extensions = { "nvim-tree" },
+			extensions = { "nvim-tree", "lazy" },
 		},
 	},
-
 	{
 		"folke/noice.nvim",
-
-		name = "noice",
-		deps = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
-		opts = {
-			lsp = {
-				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-				},
-			},
-			-- you can enable a preset for easier configuration
-			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
-				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
+		event = "VeryLazy",
+		opts = {},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
 		},
 	},
-	{ "MunifTanjim/nui.nvim" },
-	{ "rcarriga/nvim-notify" },
 	{
 		"akinsho/bufferline.nvim",
-		name = "bufferline",
+		dependencies = "nvim-tree/nvim-web-devicons",
 		opts = {
 			options = {
 				separator_style = "slant",
@@ -54,16 +28,54 @@ return {
 			},
 		},
 		event = { "BufReadPre", "BufNewFile" },
+	},
+	{
+		"rachartier/tiny-devicons-auto-colors.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {},
+	},
+	{
+		"nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
+		build = ":TSUpdate",
+		branch = "main",
+		opts = {
+			ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "regex" },
+			highlight = { enable = true },
+		},
+	},
+	{
+		"danielosw/neorg",
 
-		deps = { "nvim-tree/nvim-web-devicons" },
+		lazy = false,
+		cond = enableNeorg,
+		opts = {
+			load = {
+				["core.defaults"] = {},
+				["core.completion"] = { config = { engine = "nvim-cmp" } },
+				["core.concealer"] = {},
+				["core.dirman"] = {
+					config = {
+						workspaces = {
+							main = "~/notes",
+						},
+						index = "index.norg",
+					},
+				},
+				["core.export"] = {},
+			},
+		},
 	},
 
 	{
 		"goolord/alpha-nvim",
+		event = "VimEnter",
 	},
 	{
 		"SmiteshP/nvim-navic",
-		name = "nvim-navic",
 		opts = {
 			lsp = {
 				auto_attach = false,
@@ -75,16 +87,20 @@ return {
 			depth_limit_indicator = "..",
 			click = true,
 		},
+		lazy = true,
 	},
 	{
 		"SmiteshP/nvim-navbuddy",
-		deps = { "SmiteshP/nvim-navic", "MunifTanjim/nui.nvim" },
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim",
+		},
+		lazy = true,
 	},
 	{
 		"folke/snacks.nvim",
 		priority = 1000,
-
-		name = "snacks",
+		lazy = false,
 		---@type snacks.Config
 		opts = {
 			-- your configuration comes here
@@ -109,8 +125,14 @@ return {
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
-		name = "nvim-tree",
+		cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus", "NvimTreeFindFile", "NvimTreeCollapse" },
+		keys = {
+			{ "<C-n>", "<cmd>NvimTreeToggle<cr>", desc = "Toggle NvimTree" },
+		},
 		opts = { hijack_unnamed_buffer_when_opening = true, hijack_netrw = true },
-		deps = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
+		lazy = true,
 	},
 }

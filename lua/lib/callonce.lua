@@ -1,17 +1,5 @@
 Cwd = vim.fn.getcwd()
 local execute = vim.fn.executable
-
--- Source - https://stackoverflow.com/q/2282444
--- Posted by Wookai, modified by community. See post 'Timeline' for change history
--- Retrieved 2026-04-08, License - CC BY-SA 2.5
-function table.contains(table, element)
-	for _, value in pairs(table) do
-		if value == element then
-			return true
-		end
-	end
-	return false
-end
 local function getPython()
 	do
 		if not Windows then

@@ -1,5 +1,6 @@
 local alpha = require("alpha")
 require("lib.quotes")
+local lazy = require("lazy").stats()
 local leader = ","
 local if_nil = vim.F.if_nil
 -- Taken from alpha.themes.dashboard.button
@@ -86,10 +87,21 @@ local header = {
 		-- wrap = "overflow";
 	},
 }
+local footer_time = footer_text("Started in ...")
+vim.api.nvim_create_autocmd("User", {
+	pattern = "LazyVimStarted",
+	once = true,
+	callback = function()
+		footer_time.val = "Loaded " .. lazy.count .. " plugins in " .. lazy.startuptime .. " MS!"
+
+		pcall(vim.cmd.AlphaRedraw)
+	end,
+})
 local footer = {
 	type = "group",
 	val = {
 		footer_text(Quotes[quotepick]),
+		footer_time,
 	},
 	opts = { spacing = 1 },
 }
@@ -139,4 +151,10 @@ local startup_screen = {
 	-- deprecated
 	opts = config,
 }
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "alpha",
+	callback = function()
+		vim.opt_local.foldenable = false
+	end,
+})
 alpha.setup(startup_screen.config)
