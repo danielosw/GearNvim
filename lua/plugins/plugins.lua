@@ -1,16 +1,40 @@
 return {
-	{ "nvim-mini/mini.pairs", version = "*", name = "mini.pairs", opts = {} },
+	{ 'nvim-mini/mini.pairs', version = '*', opts = true, },
 	{
 		"saecki/crates.nvim",
-		name = "crates",
+		event = { "BufRead Cargo.toml" },
 		opts = {},
 	},
 	{
 		"chrisgrieser/nvim-rip-substitute",
+		cmd = "RipSubstitute",
+		opts = {},
+		keys = {
+			{
+				"<leader>fs",
+				function()
+					require("rip-substitute").sub()
+				end,
+				mode = { "n", "x" },
+				desc = " rip substitute",
+			},
+		},
 	},
 	{
 		"stevearc/conform.nvim",
-		name = "conform",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{
+				-- Customize or remove this keymap to your liking
+				"<leader>f",
+				function()
+					require("conform").format({ async = true })
+				end,
+				mode = "",
+				desc = "Format buffer",
+			},
+		},
 		-- This will provide type hinting with LuaLS
 		---@module "conform"
 		---@type conform.setupOpts
@@ -29,7 +53,7 @@ return {
 				},
 			},
 		},
-		config = function()
+		init = function()
 			-- If you want the formatexpr, here is the place to set it
 			vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 		end,

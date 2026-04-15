@@ -1,7 +1,7 @@
+-- load setting
+local settings = require("lib/settings")
+-- Helper that calls some stuff once so we don't do it over and over
 require("lib.callonce")
--- load autocmds
-
-require("lib.autocmds")
 -- if theme.lua does not exist, make it to prevent a crash
 if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 	local cat = RealPath("/lua/config/theme.lua")
@@ -11,26 +11,41 @@ if not vim.uv.fs_stat(ConfigPath .. "/lua/config/theme.lua") then
 		vim.uv.fs_write(file, 'vim.cmd.colorscheme("tokyonight-storm")')
 	end
 end
--- load plugin manager
-local manager = require("lib.manager")
---- Set globals
-Globals = {
-	Windows = package.config:sub(1, 1) == "\\",
-}
--- create convinance locals
-local windows = Globals.Windows
-local g = vim.g
-local opt = vim.opt
-local o = vim.o
-if windows ~= true then
-	o.clipboard = "unnamedplus"
-else
-	o.clipboard = "unnamed"
+
+local lazypath = DataPath .. "/lazy/lazy.nvim"
+if Windows then
 	-- set shell to powershell on windows with proper flags
 	vim.o.shell = "pwsh.exe"
 	vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command"
 	vim.o.shellquote = ""
 	vim.o.shellxquote = ""
+end
+
+-- install lazy if not installed already
+if not vim.uv.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+-- add mise shims to path if on linux and shims path exists
+if Windows ~= true and vim.uv.fs_stat("~/.local/share/mise/shims") then
+	vim.env.PATH = HOME .. "~/.local/share/mise/shims:" .. vim.env.PATH
+end
+-- config things that need to be changed before plugins are loaded
+local g = vim.g
+local opt = vim.opt
+local o = vim.o
+-- set up clipboard
+if Windows ~= true then
+	o.clipboard = "unnamedplus"
+else
+	o.clipboard = "unnamed"
 end
 -- set leader key to ,
 g.mapleader = ","
@@ -48,14 +63,39 @@ opt.expandtab = false
 o.tabstop = 4
 o.shiftwidth = 4
 o.number = true
+Pickerloaded = false
+-- terminal specific config options
+require("lib.terms")
+
+local lazydefault = {
+	spec = {
+		{ import = "plugins" },
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"netrwPlugin",
+			},
+		},
+	},
+}
+if settings.debugLazy then
+	lazydefault.profiling = {
+		loader = true,
+		require = true,
+	}
+end
+lazydefault.dev = {
+	path = "~/projects/neovimplugins",
+}
+-- if we are using neovide load neovide specific options
 if vim.g.neovide then
 	require("config.neovide")
 end
-
--- load plugins
-manager.pluginsetup({ "cmp", "lsp", "plugins", "themes", "visuals", "telescope" })
-
---- load configs
+require("lazy").setup(lazydefault)
+-- treesitter indent guide
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+-- load colorscheme early on
 require("config.theme")
 -- load the configs
 -- config ui
@@ -65,7 +105,16 @@ require("config.lsp")
 -- setup conform
 require("config.conform")
 -- setup keybinds
-require("config.keymapping")
+require("config.keybinds")
 -- setup alpha, in its own file due to size
 require("config.alpha")
-require("config.telescope")
+-- load custom pickers
+-- wrapper to lazy load the function so telescope can be lazyloaded
+local function pickwrapper()
+	if Pickerloaded == false then
+		require("config.telescope")
+		Pickerloaded = true
+	end
+	Themepick()
+end
+vim.api.nvim_create_user_command("Themes", pickwrapper, { desc = "theme picker" })
