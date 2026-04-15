@@ -1,47 +1,15 @@
-local enableNeorg = require("lib/settings").neorg
-local provide = function()
-	local provider = {
-		lazydev = {
-			name = "LazyDev",
-			module = "lazydev.integrations.blink",
-			-- make lazydev completions top priority (see `:h blink.cmp`)
-			score_offset = 100,
-		},
-	}
-	if enableNeorg then
-		provider.neorg = {
-			name = "neorg",
-			module = "blink.compat.source",
-		}
-	end
-	return provider
-end
-local default = function()
-	local default2 = {
-		"lazydev",
-		"lsp",
-		"path",
-		"snippets",
-		"buffer",
-	}
-	if enableNeorg then
-		default2[#default2 + 1] = "neorg"
-	end
-	return default2
-end
 return {
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
-		dependencies = { "rafamadriz/friendly-snippets", "Saghen/blink.compat" },
-
+		name = "blink.cmp",
 		-- use a release tag to download pre-built binaries
 		version = "1.*",
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
-
+		deps = { "rafamadriz/friendly-snippets", "Saghen/blink.compat" },
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
@@ -82,8 +50,15 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = default(),
-				providers = provide(),
+				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+				providers = {
+					lazydev = {
+						name = "LazyDev",
+						module = "lazydev.integrations.blink",
+						-- make lazydev completions top priority (see `:h blink.cmp`)
+						score_offset = 100,
+					},
+				},
 			},
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
@@ -95,5 +70,7 @@ return {
 		opts_extend = { "sources.default" },
 		signature = { enabled = true },
 	},
-	{ "onsails/lspkind.nvim", lazy = true },
+	{ "onsails/lspkind.nvim" },
+	{ "rafamadriz/friendly-snippets" },
+	{ "Saghen/blink.compat" },
 }
