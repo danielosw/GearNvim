@@ -14,7 +14,7 @@ local schemes = function()
 	return themes
 end
 -- custom theme picker
-Themepick = function(opts)
+local themepick = function(opts)
 	local set = false
 	-- get background to restor
 	local before_background = vim.g.colors_name or "vim"
@@ -75,4 +75,4 @@ Themepick = function(opts)
 		:find()
 end
 
--- to execute the function
+vim.api.nvim_create_user_command("Themes", themepick, { desc = "theme picker" })
