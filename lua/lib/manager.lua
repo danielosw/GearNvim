@@ -39,8 +39,10 @@ local function tablesort(plugspecs)
 end
 local function callback(value)
 	local name = value.name
-	if value.version ~= nil then
-		vim.pack.add({ { src = gh(value[1]), versioning = vim.version.range(value.version), name = name } })
+	if value.version ~= nil or value.branch ~= nil then
+		-- only use version or branch when defining not both
+		local version = (value.branch ~= nil) and value.branch or value.version
+		vim.pack.add({ { src = gh(value[1]), versioning = version, name = name } })
 	else
 		vim.pack.add({ { src = gh(value[1]), name = name } })
 	end

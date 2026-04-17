@@ -3,13 +3,12 @@ return {
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
 		name = "blink.cmp",
-		-- use a release tag to download pre-built binaries
-		version = "1.*",
+		branch = "main",
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = 'cargo build --release',
 		-- If you use nix, you can build from source using latest nightly rust with:
 		-- build = 'nix run .#build-plugin',
-		deps = { "rafamadriz/friendly-snippets", "Saghen/blink.compat" },
+		deps = { "rafamadriz/friendly-snippets", "Saghen/blink.compat", "saghen/blink.lib" },
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
@@ -39,7 +38,7 @@ return {
 					-- nvim-cmp style menu
 					draw = {
 						columns = {
-							{ "label", "label_description", gap = 1 },
+							{ "label",     "label_description", gap = 1 },
 							{ "kind_icon", "kind" },
 						},
 					},
@@ -70,6 +69,7 @@ return {
 		opts_extend = { "sources.default" },
 		signature = { enabled = true },
 	},
+	{ "saghen/blink.lib" },
 	{ "onsails/lspkind.nvim" },
 	{ "rafamadriz/friendly-snippets" },
 	{ "Saghen/blink.compat" },

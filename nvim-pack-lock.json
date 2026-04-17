@@ -5,7 +5,7 @@
       "src": "https://github.com/aznhe21/actions-preview.nvim"
     },
     "alpha-nvim": {
-      "rev": "7563da4a861ee6b3ed674d0ee5c5c0bd19383a38",
+      "rev": "6c6a89d5b068b5251c8bdf0dd57bb921bcfeeb09",
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
@@ -15,6 +15,10 @@
     "blink.compat": {
       "rev": "1454f14a8d855a578ceeba77c62538fa1459a67c",
       "src": "https://github.com/Saghen/blink.compat"
+    },
+    "blink.lib": {
+      "rev": "a459c8fbf51359902971874b5ebe05f6602db8b4",
+      "src": "https://github.com/saghen/blink.lib"
     },
     "bufferline": {
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
