@@ -1,3 +1,4 @@
+local telescope = require("telescope.builtin")
 local function keymapper(modes, mapping, run)
 	vim.keymap.set(modes, mapping, run)
 end
@@ -43,31 +44,23 @@ keymapper("n", "<leader>f", function()
 end)
 quickmap({
 	"<leader>ff",
-	function()
-		vim.cmd("Telescope find_files")
-	end,
+	telescope.find_files,
 })
 quickmap({
 	"<leader>fg",
-	function()
-		vim.cmd("Telescope live_grep")
-	end,
+	telescope.live_grep,
 })
 quickmap({
 	"<leader>fb",
-	function()
-		vim.cmd("Telescope buffers")
-	end,
+	telescope.buffers,
 })
 quickmap({
 	"<leader>fh",
-	function()
-		vim.cmd("Telescope help_tags")
-	end,
+	telescope.help_tags,
 })
 quickmap({
 	"<C-n>",
-	function()
-		vim.cmd("NvimTreeToggle")
-	end,
+	vim.cmd.NvimTreeToggle,
 })
+quickmap({ "<leader>fl",
+	telescope.current_buffer_fuzzy_find })
