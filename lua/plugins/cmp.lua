@@ -1,4 +1,6 @@
 return {
+	{ "saghen/blink.lib" },
+
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
@@ -38,7 +40,7 @@ return {
 					-- nvim-cmp style menu
 					draw = {
 						columns = {
-							{ "label",     "label_description", gap = 1 },
+							{ "label", "label_description", gap = 1 },
 							{ "kind_icon", "kind" },
 						},
 					},
@@ -69,7 +71,6 @@ return {
 		opts_extend = { "sources.default" },
 		signature = { enabled = true },
 	},
-	{ "saghen/blink.lib" },
 	{ "onsails/lspkind.nvim" },
 	{ "rafamadriz/friendly-snippets" },
 	{ "Saghen/blink.compat" },

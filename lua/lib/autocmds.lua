@@ -4,8 +4,10 @@ local function buildcallback(obj, name)
 	if obj.code == 0 then
 		vim.notify("Finished building " .. name, vim.log.levels.INFO)
 	else
-		vim.notify("Building " .. name .. " failed with error code " .. obj.code .. " and message " .. obj.stderr,
-			vim.log.levels.ERROR)
+		vim.notify(
+			"Building " .. name .. " failed with error code " .. obj.code .. " and message " .. obj.stderr,
+			vim.log.levels.ERROR
+		)
 	end
 end
 
@@ -18,12 +20,12 @@ local hooks = function(ev)
 		vim.system({
 			shell,
 			"-c",
-			"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
-		}, { cwd = ev.data.path }, function(obj) buildcallback(obj, "fzf") end)
+			"cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+		}, { cwd = ev.data.path }, function(obj)
+			buildcallback(obj, "fzf")
+		end)
 	elseif name == "blink.cmp" and (kind == "install" or kind == "update") then
-		vim.notify("Building blink.cmp", vim.log.levels.INFO)
-		local _ = vim.system({ "cargo", "build", "--release" }, { cwd = ev.data.path },
-			function(obj) buildcallback(obj, "blink") end)
+		require("blink.cmp").build()
 	end
 end
 local callback = function()
