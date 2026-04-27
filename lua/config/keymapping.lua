@@ -1,3 +1,13 @@
+local telescope = require("telescope.builtin")
+local function keymapper(modes, mapping, run)
+	vim.keymap.set(modes, mapping, run)
+end
+local function normalmap(mapping, run)
+	keymapper("n", mapping, run)
+end
+local function quickmap(tablemap)
+	normalmap(tablemap[1], tablemap[2])
+end
 vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
@@ -26,6 +36,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, opts)
-		vim.keymap.set({ "n" }, "<leader>cC", vim.lsp.codelens.refresh, opts)
 	end,
 })
+vim.keymap.set({ "n", "x" }, "<leader>fs", require("rip-substitute").sub)
+keymapper("n", "<leader>f", function()
+	require("conform").format({ async = true })
+end)
+quickmap({
+	"<leader>ff",
+	telescope.find_files,
+})
+quickmap({
+	"<leader>fg",
+	telescope.live_grep,
+})
+quickmap({
+	"<leader>fb",
+	telescope.buffers,
+})
+quickmap({
+	"<leader>fh",
+	telescope.help_tags,
+})
+quickmap({
+	"<C-n>",
+	vim.cmd.NvimTreeToggle,
+})
+quickmap({ "<leader>fl",
+	telescope.current_buffer_fuzzy_find })

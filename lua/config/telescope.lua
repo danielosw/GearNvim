@@ -4,6 +4,7 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 local previewers = require("telescope.previewers")
+local ConfigPath = Globals.ConfigPath
 -- get colorschemes
 local schemes = function()
 	-- get a list of all color schemes
@@ -14,7 +15,7 @@ local schemes = function()
 	return themes
 end
 -- custom theme picker
-Themepick = function(opts)
+local themepick = function(opts)
 	local set = false
 	-- get background to restor
 	local before_background = vim.g.colors_name or "vim"
@@ -75,4 +76,4 @@ Themepick = function(opts)
 		:find()
 end
 
--- to execute the function
+vim.api.nvim_create_user_command("Themes", themepick, { desc = "theme picker" })
