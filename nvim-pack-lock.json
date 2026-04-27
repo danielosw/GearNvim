@@ -9,7 +9,7 @@
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
-      "rev": "0a4caef5829b88fb914e5d82196903aac3d57a69",
+      "rev": "e1dbca9ea1d8dc7a83e27a52bbd990bd717e54a6",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.compat": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/Saghen/blink.compat"
     },
     "blink.lib": {
-      "rev": "2cd9ed035f9242739079dd78505e9244225140b2",
+      "rev": "dda2666685a5ac3598166577d2e34f1fff6b1637",
       "src": "https://github.com/saghen/blink.lib"
     },
     "bufferline": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "81878de76c0de4ce289513734ad80c31ec7871b8",
+      "rev": "8fde495949782bb61c2605174e231d145a048d8c",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navbuddy": {
@@ -85,7 +85,7 @@
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-tree": {
-      "rev": "d277467fc0d1d0e2bca88165a1de6b526f9f6fe8",
+      "rev": "24cfcc94372e526fd9e1c2803ede9e0f1715e33f",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-web-devicons": {
