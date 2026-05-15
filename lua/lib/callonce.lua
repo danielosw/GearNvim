@@ -1,5 +1,25 @@
 Cwd = vim.fn.getcwd()
 local execute = vim.fn.executable
+--- @return boolean
+local function Iswindows()
+	if package.config:sub(1, 1) == "\\" then
+		return true
+	else
+		return false
+	end
+end
+local Windows = Iswindows()
+-- Source - https://stackoverflow.com/q/2282444
+-- Posted by Wookai, modified by community. See post 'Timeline' for change history
+-- Retrieved 2026-04-08, License - CC BY-SA 2.5
+function table.contains(table, element)
+	for _, value in pairs(table) do
+		if value == element then
+			return true
+		end
+	end
+	return false
+end
 local function getPython()
 	do
 		if not Windows then
@@ -12,14 +32,6 @@ local function getPython()
 			end
 		end
 		return vim.fn.exepath("python")
-	end
-end
---- @return boolean
-local function Iswindows()
-	if package.config:sub(1, 1) == "\\" then
-		return true
-	else
-		return false
 	end
 end
 --- @param path string
@@ -57,9 +69,12 @@ function ForEach(iter, func)
 	end
 end
 
-HOME = vim.env.HOME
-Term = vim.env.TERM
-Windows = Iswindows()
-PythonPath = getPython()
-ConfigPath = vim.fn.stdpath("config")
-DataPath = vim.fn.stdpath("data")
+Globals = {
+	Windows = Windows,
+	Home = vim.env.HOME,
+	Term = vim.env.TERM,
+	PythonPath = getPython(),
+	ConfigPath = vim.fn.stdpath("config"),
+	DataPath = vim.fn.stdpath("data"),
+}
+

@@ -1,5 +1,8 @@
 local conform = require("conform")
--- Function to make the default setup more convenient
+--- Function to make the default setup more convenient
+---@param bufnr integer
+---@param formatter string
+---@return table
 local haveformat = function(bufnr, formatter)
 	if conform.get_formatter_info(formatter, bufnr).available then
 		return { formatter }
@@ -57,11 +60,4 @@ conform.setup({
 			return haveformat(bufnr, "biome")
 		end,
 	},
-})
--- format on write
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		conform.format({ bufnr = args.buf })
-	end,
 })

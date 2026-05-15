@@ -1,6 +1,4 @@
---[[
-This file is a list of quotes to randomly load on start
-]]
+---This file is a list of quotes to randomly load on start
 local quote = require("lib/settings").quotes
 local Inspire = quote.inspire
 local Comedy = quote.comedy
