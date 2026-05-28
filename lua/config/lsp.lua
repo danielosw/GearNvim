@@ -28,9 +28,10 @@ local enabled_server = {
 	["intelephense"] = false,
 	["hls"] = true,
 	["powershell_es"] = true,
-	["denols"] = true,
+	["denols"] = false,
 	["basedpyright"] = true,
 	["marksman"] = true,
+	["nginx_language_server"] = true,
 }
 for i, name in pairs(enabled_server) do
 	vim.lsp.enable(i, name)
