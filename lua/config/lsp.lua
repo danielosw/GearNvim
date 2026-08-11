@@ -32,6 +32,7 @@ local enabled_server = {
 	["basedpyright"] = true,
 	["marksman"] = true,
 	["nginx_language_server"] = true,
+	["systemd_lsp"] = true,
 }
 for i, name in pairs(enabled_server) do
 	vim.lsp.enable(i, name)

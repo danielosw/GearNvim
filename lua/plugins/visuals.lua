@@ -90,7 +90,7 @@ return {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
-			bigfile = { enabled = true },
+			bigfile = { enabled = true, size = 3 * 1024 * 1024, line_length = 10000000 },
 			dashboard = { enabled = false },
 			explorer = { enabled = false },
 			indent = { enabled = false },
@@ -112,5 +112,10 @@ return {
 		name = "nvim-tree",
 		opts = { hijack_unnamed_buffer_when_opening = true, hijack_netrw = true },
 		deps = { "nvim-tree/nvim-web-devicons" },
+	},
+	{
+		"folke/ts-comments.nvim",
+		opts = {},
+		name = "ts-comments",
 	},
 }

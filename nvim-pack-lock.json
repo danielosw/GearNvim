@@ -9,7 +9,7 @@
       "src": "https://github.com/goolord/alpha-nvim"
     },
     "blink.cmp": {
-      "rev": "9dcb1f3a9164f10c8950a790aace576f2e89dc78",
+      "rev": "8ca29c2eb34f5ce4770bffc0d62e6f636a4e8526",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.compat": {
@@ -17,7 +17,7 @@
       "src": "https://github.com/Saghen/blink.compat"
     },
     "blink.lib": {
-      "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
+      "rev": "c8fdc12c8a2fab6cf786dd7141a283f8079f902b",
       "src": "https://github.com/saghen/blink.lib"
     },
     "bufferline": {
@@ -25,7 +25,7 @@
       "src": "https://github.com/akinsho/bufferline.nvim"
     },
     "conform": {
-      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "crates": {
@@ -53,7 +53,7 @@
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "mini.pairs": {
-      "rev": "fd150ac39b78e6a2286f5138e472b7dc7eba43b9",
+      "rev": "b1c5a726921b7a8c9321e9a7a208aa0571de5810",
       "src": "https://github.com/nvim-mini/mini.pairs"
     },
     "noice": {
@@ -65,7 +65,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "292f44408498103c47996ff5c18fd366293840d8",
+      "rev": "4267d26e60323a45e18f8e7a63a964cc8f53ca4e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-navbuddy": {
@@ -81,15 +81,15 @@
       "src": "https://github.com/rcarriga/nvim-notify"
     },
     "nvim-rip-substitute": {
-      "rev": "5aafa8e31971d2fb1dbb207f1ecd3b12b1ba0f88",
+      "rev": "6a398eebc581ff2df2fcef93216ca08b1870a397",
       "src": "https://github.com/chrisgrieser/nvim-rip-substitute"
     },
     "nvim-tree": {
-      "rev": "7ff7040bf6c246671eb55cb1727de4fd9f92a106",
+      "rev": "b2aadda94b107480c48e548d6db51c6840b7b33c",
       "src": "https://github.com/nvim-tree/nvim-tree.lua"
     },
     "nvim-web-devicons": {
-      "rev": "dad71387de386a946b123079d0e53f23028f3abd",
+      "rev": "2ae6958df7ced50baac5035cec0c15799eedfbf7",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "plenary.nvim": {
@@ -113,12 +113,20 @@
       "src": "https://github.com/rachartier/tiny-devicons-auto-colors.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
-      "rev": "e930d0a46031645040d5492595b46cdf6ab3514f",
+      "rev": "6264451f14119d63a52580e5198d6baf8518b0b2",
       "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
     },
     "tokyonight.nvim": {
       "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
       "src": "https://github.com/folke/tokyonight.nvim"
+    },
+    "ts-comments": {
+      "rev": "a59d6092213447450191122c9346f309161504cb",
+      "src": "https://github.com/folke/ts-comments.nvim"
+    },
+    "ts-comments.nvim": {
+      "rev": "a59d6092213447450191122c9346f309161504cb",
+      "src": "https://github.com/folke/ts-comments.nvim"
     }
   }
 }
