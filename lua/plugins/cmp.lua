@@ -1,6 +1,6 @@
 return {
 	{ "saghen/blink.lib" },
-
+	---@type plugspec
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source

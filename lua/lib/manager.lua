@@ -3,6 +3,7 @@
 ---@class pluginManager
 ---@field pluginsetup function
 local M = {}
+
 ---@param x string
 ---@return string
 local gh = function(x)
@@ -17,8 +18,31 @@ local function setDefaults(pluginstable)
 	end
 	return plugspecs
 end
+---@class LazyKeysBase: vim.keymap.set.Opts
+---@field [1] string The left-hand side (lhs) keymap trigger
+---@field [2]? string|fun() The right-hand side (rhs) command/function
+---@field mode? string|string[] Mode short-names (defaults to "n")
+---@field ft? string|string[] Filetype for buffer-local keymaps
+---@field desc? string Description for the keymap (or which-key)
+---@field expr? boolean
+---@field silent? boolean
+---@field remap? boolean
+---@field [string] any Allow any additional vim.keymap.set options
 
----@param plugspecs table
+---An entry in `keys` can be a string, a string array, or a full key spec
+---@alias KeysSpec string|string[]|LazyKeysBase
+---@class plugspec
+---@field opts? table
+---@field deps? string[]
+---@field name? string
+---@field version? string
+---@field branch? string
+---@field priority? number
+---@field config? function
+---@field event? string[]
+---@field enabled? boolean | function
+---@field keys?  KeysSpec[]
+---@param plugspecs plugspec[]
 ---@return table
 local function tablesort(plugspecs)
 	local ps = plugspecs
@@ -37,6 +61,7 @@ local function tablesort(plugspecs)
 	end)
 	return ps
 end
+---@param value plugspec
 local function callback(value)
 	local name = value.name
 	if value.version ~= nil or value.branch ~= nil then
@@ -54,7 +79,8 @@ local function callback(value)
 		value.config()
 	end
 end
----@param pluginspecs table
+
+---@param pluginspecs plugspec[]
 local function setup(pluginspecs)
 	for _, value in ipairs(pluginspecs) do
 		local event = value.event

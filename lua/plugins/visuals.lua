@@ -1,5 +1,5 @@
 return {
-	{ "nvim-tree/nvim-web-devicons" },
+	{ "nvim-tree/nvim-web-devicons", priority = 1000, },
 
 	{
 		"rachartier/tiny-devicons-auto-colors.nvim",

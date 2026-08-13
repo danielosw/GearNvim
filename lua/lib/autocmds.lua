@@ -11,8 +11,6 @@ local function buildcallback(obj, name)
 	end
 end
 
--- setup autocmds
----@param ev vim.api.keyset.events
 local hooks = function(ev)
 	local name, kind = ev.data.spec.name, ev.data.kind
 	if name == "telescope-fzf-native.nvim" and (kind == "install" or kind == "update") then
@@ -25,7 +23,7 @@ local hooks = function(ev)
 			buildcallback(obj, "fzf")
 		end)
 	elseif name == "blink.cmp" and (kind == "install" or kind == "update") then
-		require("blink.cmp").build()
+		require("blink.cmp").build():pwait()
 	end
 end
 local callback = function()

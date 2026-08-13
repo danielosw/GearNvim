@@ -1,5 +1,7 @@
 return {
+
 	{ "neovim/nvim-lspconfig" },
+	---@type plugspec
 	{
 		"folke/lazydev.nvim",
 		name = "lazydev",
@@ -11,12 +13,9 @@ return {
 			},
 		},
 	},
-
+	---@type plugspec
 	{
 		"aznhe21/actions-preview.nvim",
-		config = function()
-			vim.keymap.set({ "v", "n" }, "gf", require("actions-preview").code_actions)
-		end,
 	},
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",

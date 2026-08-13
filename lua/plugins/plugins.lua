@@ -8,6 +8,8 @@ return {
 	{
 		"chrisgrieser/nvim-rip-substitute",
 	},
+	{ "folke/which-key.nvim", opts = {}, name = "which-key", deps = { "nvim-tree/nvim-web-devicons" } },
+
 	{
 		"stevearc/conform.nvim",
 		name = "conform",

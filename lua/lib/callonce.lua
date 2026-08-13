@@ -77,4 +77,19 @@ Globals = {
 	ConfigPath = vim.fn.stdpath("config"),
 	DataPath = vim.fn.stdpath("data"),
 }
+---@param modes string|string[]
+---@param mapping string
+---@param run string|fun()
+---@param opts? vim.keymap.set.Opts --If string, treats it as { desc = opts }. If table, passes options to vim.keymap.set.
+function Keymapper(modes, mapping, run, opts)
+	vim.keymap.set(modes, mapping, run, opts)
+end
 
+---@param tablemap LazyKeysBase|string[]
+function Quickmap(tablemap, opts)
+	-- Extract options or description directly from tablemap if present
+	local mode = tablemap.mode or "n"
+	-- we want to move everything
+	local options = opts or {}
+	Keymapper(mode, tablemap[1], tablemap[2], options)
+end

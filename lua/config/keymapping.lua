@@ -1,17 +1,9 @@
 local telescope = require("telescope.builtin")
-local function keymapper(modes, mapping, run)
-	vim.keymap.set(modes, mapping, run)
-end
-local function normalmap(mapping, run)
-	keymapper("n", mapping, run)
-end
-local function quickmap(tablemap)
-	normalmap(tablemap[1], tablemap[2])
-end
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+Quickmap({ "<space>e", vim.diagnostic.open_float }, { desc = "Show diagnostic in floating window" })
+Quickmap({ "<leader>q", vim.diagnostic.setloclist }, { desc = "Add buffer diagnostics to location list" })
 
-vim.keymap.set("n", "<leader>gg", require("snacks").lazygit.open)
+Quickmap({ "<leader>gg", require("snacks").lazygit.open }, { desc = "Open lazygit" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
@@ -21,46 +13,58 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-		vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-		vim.keymap.set("n", "<leader>wl", function()
-			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, opts)
-		vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, opts)
+		Quickmap({ "gD", vim.lsp.buf.declaration }, { buffer = ev.buf, desc = "Get declaration" })
+		Quickmap({ "gd", vim.lsp.buf.definition }, { buffer = ev.buf, desc = "Get definition" })
+		Quickmap({ "gh", vim.lsp.buf.hover }, { buffer = ev.buf, desc = "Show hover information" })
+		Quickmap({ "gi", vim.lsp.buf.implementation }, { buffer = ev.buf, desc = "Get implementation" })
+		Quickmap({ "<C-k>", vim.lsp.buf.signature_help }, { buffer = ev.buf, desc = "Show siginature information" })
+		Quickmap({
+			"<leader>wa",
+			vim.lsp.buf.add_workspace_folder,
+		}, { buffer = ev.buf, desc = "Add folder at path to workspace" })
+		Quickmap({ "<leader>wr", vim.lsp.buf.remove_workspace_folder }, opts)
+		Quickmap({
+			"<leader>wl",
+			function()
+				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			end,
+		}, { buffer = ev.buf, desc = "List workspace folders" })
+		Quickmap(
+			{ "<leader>D", vim.lsp.buf.type_definition },
+			{ buffer = ev.buf, desc = "Jump to the definition of the type hovered over" }
+		)
+
+		Quickmap({ "<leader>rn", vim.lsp.buf.rename }, { buffer = ev.buf, desc = "Rename symbol" })
+		Quickmap({ mode = { "n", "v" }, "<leader>ca", vim.lsp.buf.code_action }, opts)
+		Quickmap({ mode = { "n", "v" }, "<leader>cc", vim.lsp.codelens.run }, opts)
 	end,
 })
-vim.keymap.set({ "n", "x" }, "<leader>fs", require("rip-substitute").sub)
-keymapper("n", "<leader>f", function()
-	require("conform").format({ async = true })
-end)
-quickmap({
+Quickmap({ mode = { "n", "x" }, "<leader>fs", require("rip-substitute").sub }, { desc = "open rip-substitute" })
+Quickmap({
 	"<leader>ff",
 	telescope.find_files,
-})
-quickmap({
+}, { desc = "search files" })
+Quickmap({
 	"<leader>fg",
 	telescope.live_grep,
-})
-quickmap({
+}, { desc = "search in all files" })
+Quickmap({
 	"<leader>fb",
 	telescope.buffers,
-})
-quickmap({
+}, { desc = "search in buffers" })
+Quickmap({
 	"<leader>fh",
 	telescope.help_tags,
-})
-quickmap({
+}, { desc = "search in help tags" })
+Quickmap({
 	"<C-n>",
 	vim.cmd.NvimTreeToggle,
+}, { desc = "toggle NvimTree" })
+Quickmap({ "<leader>fl", telescope.current_buffer_fuzzy_find }, { desc = "search in current buffer" })
+Quickmap({
+	"<leader>?",
+	function()
+		require("which-key").show({ global = false })
+	end,
 })
-quickmap({ "<leader>fl",
-	telescope.current_buffer_fuzzy_find })
+Quickmap({ mode = { "v", "n" }, "gf", require("actions-preview").code_actions }, { desc = "Preview code actions" })
