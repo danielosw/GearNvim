@@ -2,12 +2,6 @@ return {
 	{ "nvim-tree/nvim-web-devicons", priority = 1000, },
 
 	{
-		"rachartier/tiny-devicons-auto-colors.nvim",
-		name = "tiny-devicons-auto-colors",
-		deps = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
-	},
-	{
 		"nvim-lualine/lualine.nvim",
 		name = "lualine",
 		deps = { "nvim-tree/nvim-web-devicons" },
