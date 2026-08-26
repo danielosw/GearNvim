@@ -65,3 +65,5 @@ require("config.keymapping")
 -- setup alpha, in its own file due to size
 require("config.alpha")
 require("config.telescope")
+-- load custom commands
+require("config.commands")

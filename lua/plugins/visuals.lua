@@ -36,6 +36,18 @@ return {
 			},
 		},
 	},
+	{
+		"rachartier/tiny-devicons-auto-colors.nvim",
+		name = "tiny-devicons-auto-colors",
+		dependencies = { "nvim-tree/nvim-web-devicons"},
+		event = "VeryLazy",
+		opts = {
+				cache = {
+					enabled = true,
+					path = vim.fn.stdpath("cache") .. "\\tiny-devicons-auto-colors-cache.json",
+				},
+			}
+	},
 	{ "MunifTanjim/nui.nvim" },
 	{ "rcarriga/nvim-notify" },
 	{
