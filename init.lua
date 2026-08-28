@@ -1,3 +1,4 @@
+Settings = require("lib.settings")
 require("lib.callonce")
 local windows = Globals.Windows
 local ConfigPath = Globals.ConfigPath
@@ -39,15 +40,11 @@ opt.termguicolors = true
 -- Disabling default style's because I don't like them
 g.python_recommended_style = 0
 g.rust_recommended_style = 0
--- Enabling tabs and setting their size
-opt.expandtab = false
-o.tabstop = 4
-o.shiftwidth = 4
 o.number = true
 if vim.g.neovide then
 	require("config.neovide")
 end
-
+Settabs(Settings.spacing)
 -- load plugins
 manager.pluginsetup({ "cmp", "lsp", "plugins", "themes", "visuals", "telescope" })
 

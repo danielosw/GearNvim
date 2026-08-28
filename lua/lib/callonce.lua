@@ -20,6 +20,7 @@ function table.contains(table, element)
 	end
 	return false
 end
+
 local function getPython()
 	do
 		if not Windows then
@@ -44,6 +45,7 @@ function RealPath(path)
 	end
 	return path
 end
+
 --- Runs func over table and returns the result
 --- @param iter table
 --- @param func function
@@ -66,6 +68,22 @@ function ForEach(iter, func)
 		for _, value in ipairs(iter) do
 			func(value)
 		end
+	end
+end
+
+---@param style IndentStyle
+---@return nil
+function Settabs(style)
+	if (style == "tabs") then
+		-- figure out what is being used
+
+		vim.opt.expandtab = false
+		vim.o.tabstop = 4
+		vim.o.shiftwidth = 4
+	elseif (style == "spaces") then
+		vim.opt.expandtab = true
+		vim.o.tabstop = 4
+		vim.o.shiftwidth = 4
 	end
 end
 

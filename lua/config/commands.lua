@@ -16,6 +16,7 @@ local function spacesToTabs(opts)
 		end)
 	end
 	vim.api.nvim_buf_set_lines(bufnr, start_line, end_line, false, modified_lines)
+	Settabs("tabs")
 end
 ---@param opts vim.api.keyset.user_command_args Command context metadata passed by Neovim
 local function tabsToSpaces(opts)
@@ -35,6 +36,7 @@ local function tabsToSpaces(opts)
 		end)
 	end
 	vim.api.nvim_buf_set_lines(bufnr, start_line, end_line, false, modified_lines)
+	Settabs("spaces")
 end
 
 ---@type vim.api.keyset.user_command
